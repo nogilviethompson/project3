@@ -35,7 +35,7 @@ int main() {
 	recfifo.fifoclose();
 	
 	/* Parse the incoming message */
-	/* Form:  $type*name  */
+	/* Form:  username~!&message  */
 	int pos = inMessage.find_first_of("~!&");
 	username = inMessage.substr(0,pos);
 	pos = pos + 3;
