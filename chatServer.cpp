@@ -50,7 +50,7 @@ int main() {
 	for (unsigned int i = 0; i < chatLog.size(); i++)
     {
     outMessage = chatLog[i];
-    string outMessage = positions[i];
+    string outMessage = chatLog[i];
 	cout << outMessage << endl;
 	sendfifo.openwrite();
 	sendfifo.send(outMessage);
