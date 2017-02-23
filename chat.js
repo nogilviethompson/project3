@@ -9,25 +9,21 @@ function init() {
     }
 }
 
-<<<<<<< HEAD
 function checkName() {
     var uname = document.getElementById('uname').value;
 
-    if (uname.indexOf('~!&') != -1){
-	document.getElementById('username_show').innerHTML = 'Username cannot contain the sequence ~!&';
-    } else{
 	document.getElementById('username_show').innerHTML = 'Your username is '+uname;
 	document.getElementById('uname').disabled = true;
 	document.getElementById('message').disabled = false;
-=======
-function checkName () {
+}
 
-    var uname = document.getElementById('uname').value;
+function getResponse(){
+	var uname = document.getElementById('uname').value;
+	var message = 
+}
 
-    if (uname.indexOf('~!&') != -1){
-	document.getElementById('response_area').innerHTML = 'Username cannot contain the sequence ~!&';;
-    } else{
-	document.getElementById('response_area').innerHTML = 'Good username!';;
->>>>>>> 524843d833cf43c1251f66dc14b18852063556de
-	}
+function hangUp(){
+	XMLHttp.open("GET", "/cgi-bin/ogilviethompsonh_chatCGI.cgi?"
+						 + "&killmessage=**KILLKILLKILL**"
+						 ,true);
 }
