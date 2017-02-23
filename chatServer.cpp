@@ -7,14 +7,8 @@
 #include <vector>
 #include <iostream>
 #include <fstream>
-#include <map>
 #include <vector>
 #include <algorithm>
-#include "english_stem.h"
-#include "meta.h"
-#include "stemming.h"
-#include "string_util.h"
-#include "utilities.h"
 #include "fifo.h"
 
 using namespace std;
