@@ -19,8 +19,7 @@ string send_fifo = "messageReply";
 
 int main() {
   vector<string> chatLog;
-  string username, message, full, outMessage;
- 
+  
 // create the FIFOs for communication
   Fifo recfifo(receive_fifo);
   Fifo sendfifo(send_fifo); 
@@ -36,20 +35,14 @@ int main() {
 	
 	/* Parse the incoming message */
 	/* Form:  username~!&message  */
-	int pos = inMessage.find_first_of("~!&");
-	username = inMessage.substr(0,pos);
-	pos = pos + 3;
 	
 	//Create a string that is the message term
-	message = inMessage.substr(pos,2000);
-	cout << "Received: " << username << " - " << message << endl;	
-	full = username + ": " + message;
-	chatLog.push_back(full);
+	cout << "Received - " << inMessage << endl;
+	chatLog.push_back(inMessage);
 	
 	//Iterate through the positions vector, sending each line out as a message
 	for (unsigned int i = 0; i < chatLog.size(); i++)
     {
-    outMessage = chatLog[i];
     string outMessage = chatLog[i];
 	cout << outMessage << endl;
 	sendfifo.openwrite();
@@ -58,7 +51,7 @@ int main() {
 	}
 	
 	//After all the messages have been sent, send out the $END signal
-	outMessage = "$END";
+	string outMessage = "$END";
 	cout << outMessage << endl;
 	sendfifo.openwrite();
 	sendfifo.send(outMessage);

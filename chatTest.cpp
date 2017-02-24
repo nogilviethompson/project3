@@ -14,7 +14,7 @@ string receive_fifo = "messageReply";
 string send_fifo = "messageRequest";
 
 int main() {
-  string username, message, reply;
+  string username, word, reply;
   
   // create the FIFOs for communication
 	Fifo recfifo(receive_fifo);
@@ -29,26 +29,36 @@ int main() {
 	  cin >> username;
   }
   
-  while (1) {
-	  //ask for the message
-	cout << "Enter a message:";
-	getline(cin, message);
-	
-	message = username + "~!&" + message;
-	cout << "Send:" << message << endl;
+  while(1){
+   	cout << "Enter a message: ";
+   	getline(cin, word);
+   	word = username+": "+word;
+	cout << "Send:" << word << endl;
 	sendfifo.openwrite();
-	sendfifo.send(message);
-	sendfifo.fifoclose();
+	sendfifo.send(word);
 	
-	do{
-	/* Get a message from a server */
-	/* Repeat until the $END signal is received */
+	
 	recfifo.openread();
+	
+	/* Get a message from a server */
 	reply = recfifo.recv();
-	recfifo.fifoclose();
-	cout << "Server sent: " << reply << endl;
-	} while (reply.find("$END") == string::npos);
-  }
+	while(reply.find("$END") == -1)
+	{
+	cout<< reply << endl;
+	reply = recfifo.recv();
+	}
+	
+	if (reply.find("$END") != -1)
+	{
+	
+	cout<< reply.substr(0,reply.find("$END")) << endl;
+	}
+	
+	
 
+	recfifo.fifoclose();
+	sendfifo.fifoclose();
+	}
+	
   return 0;
 }
