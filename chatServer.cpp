@@ -60,7 +60,6 @@ int main() {
 		sendfifo.send(outMessage);
 		sendfifo.fifoclose();
 	}
-  
-  return 0;
   }
+  return 0;
 }

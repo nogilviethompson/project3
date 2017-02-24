@@ -32,14 +32,15 @@ int main() {
   while(1){
    	cout << "Enter a message: ";
    	getline(cin, word);
-   	word = username+": "+word;
+   	word = "**SEND**"+username+": "+word;
 	cout << "Send:" << word << endl;
 	sendfifo.openwrite();
 	sendfifo.send(word);
-	
-	
+	sendfifo.fifoclose();
+	sendfifo.openwrite();
+	string get = ("**GET**");
+	sendfifo.send(get);
 	recfifo.openread();
-	
 	/* Get a message from a server */
 	reply = recfifo.recv();
 	while(reply.find("$END") == -1)
