@@ -19,11 +19,19 @@ function checkName() {
 
 function getResponse(){
 	var uname = document.getElementById('uname').value;
-	var message = 
+	var message = document.getElementById('message').value;
+	
+	if (message.length < 1) return;
+
+    XMLHttp.open("GET", "/cgi-bin/ogilviethompsonh_Shakefetchajax.cgi?"
+						 + "&username=" + uname
+						 + "&message=" + message
+						 + "&killmessage=FALSE"
+						 ,true);
 }
 
 function hangUp(){
 	XMLHttp.open("GET", "/cgi-bin/ogilviethompsonh_chatCGI.cgi?"
-						 + "&killmessage=**KILLKILLKILL**"
+						 + "&killmessage=TRUE"
 						 ,true);
 }
