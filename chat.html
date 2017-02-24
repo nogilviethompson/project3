@@ -1,7 +1,7 @@
 <html>
 <head>
-<title>Risk Mitigation Demo</title>
-<META AUTHOR="Nicky Ogilvie-Thompson">
+<title>Crash Chat</title>
+<META AUTHOR="HNOT, JA, YX, and BG">
 </head>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 
@@ -9,8 +9,8 @@
 </script>
 
 <body onload="init()" onunload="hangUp()">
-<h1>Software Development - Risk Mitigation Demo</h1>
-
+<h1>Software Development - Chat Program</h1>
+<br>Written by Jessie Alperin, Bennett Grigull, Nicky Ogilvie-Thompson, and Yanqi Xu</br>
 
 </tr>
 </table>
@@ -32,7 +32,8 @@ Type a message:
 
 <p>
   <input type="button" onclick="javascript: sendMessage ()" name="Send" value="Send" />
-  <input type="button" onclick="javascript: getResponse ()" name="Get Response" value="Get Response" />
+  <input type="button" onclick="javascript: autoRefresh ()" name="Get Response" value="Get Response" />
+  <input type="button" onclick="javascript: hangUp ()" name="Hang Up" value="Hang Up" />
 </p>
 <div id = "response_area">
 </div>

@@ -44,11 +44,14 @@ function getResponse(){
 	XMLHttp.send(null);
 }
 
+var intVar
+
 function autoRefresh(){
-    intVar = setInterval(function(){ getResponse()}, 1000);
+    var intVar = setInterval(function(){ getResponse()}, 10000);
 }
 
 function hangUp(){
+	clearInterval(intVar);
 	var com = 'KILL';
 	XMLHttp.open("GET", "/cgi-bin/ogilviethompsonh_chatAjax.cgi?"
 						 + "&command=" + com
