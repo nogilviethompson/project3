@@ -13,6 +13,10 @@
 
 using namespace std;
 
+void receiveMessage (string message, vector<string>& chatLog);
+void sendChatLog (Fifo& sendfifo, vector<string> chatLog);
+void clearChatLog (vector<string>& chatLog);
+
 /* Fifo names */
 string receive_fifo = "messageRequest";
 string send_fifo = "messageReply";
@@ -24,8 +28,6 @@ int main() {
   Fifo recfifo(receive_fifo);
   Fifo sendfifo(send_fifo); 
   
-  chatLog.push_back(" ");
-  
   while (1) {
 
     /* Get a message from a client */
@@ -33,30 +35,32 @@ int main() {
     string inMessage = recfifo.recv();
 	recfifo.fifoclose();
 	
-	/* Parse the incoming message */
-	/* Form:  username~!&message  */
-	
-	//Create a string that is the message term
-	cout << "Received - " << inMessage << endl;
-	chatLog.push_back(inMessage);
-	
-	//Iterate through the positions vector, sending each line out as a message
-	for (unsigned int i = 0; i < chatLog.size(); i++)
-    {
-    string outMessage = chatLog[i];
-	cout << outMessage << endl;
-	sendfifo.openwrite();
-	sendfifo.send(outMessage);
-	sendfifo.fifoclose();
+	if (inMessage.find("**SEND**") == 0){
+		string message = inMessage.substr(8);
+		cout << "Received - " << message << endl;
+		chatLog.push_back(message);
 	}
 	
+	if (inMessage.find("**KILL**") == 0){
+		chatLog.clear();
+	}
+	
+	if (inMessage.find("**GET**") == 0){
+		for (unsigned int i = 0; i < chatLog.size(); i++){
+			string outMessage = chatLog[i];
+			cout << outMessage << endl;
+			sendfifo.openwrite();
+			sendfifo.send(outMessage);
+			sendfifo.fifoclose();
+		}
 	//After all the messages have been sent, send out the $END signal
-	string outMessage = "$END";
-	cout << outMessage << endl;
-	sendfifo.openwrite();
-	sendfifo.send(outMessage);
-	sendfifo.fifoclose();
-  }
+		string outMessage = "$END";
+		cout << outMessage << endl;
+		sendfifo.openwrite();
+		sendfifo.send(outMessage);
+		sendfifo.fifoclose();
+	}
   
   return 0;
+  }
 }

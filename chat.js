@@ -17,21 +17,38 @@ function checkName() {
 	document.getElementById('message').disabled = false;
 }
 
-function getResponse(){
+function sendMessage(){
 	var uname = document.getElementById('uname').value;
 	var message = document.getElementById('message').value;
 	
-	if (message.length < 1) return;
-
-    XMLHttp.open("GET", "/cgi-bin/ogilviethompsonh_Shakefetchajax.cgi?"
+    XMLHttp.open("GET", "/cgi-bin/ogilviethompsonh_chatAjax.cgi?"
+						 + "&command=SEND"
 						 + "&username=" + uname
 						 + "&message=" + message
-						 + "&killmessage=FALSE"
 						 ,true);
+	
+	XMLHttp.open("GET", "/cgi-bin/ogilviethompsonh_chatAjax.cgi?"
+						+ "&command=GET"
+						,true);
+}
+
+function getResponse(){
+	XMLHttp.open("GET", "/cgi-bin/ogilviethompsonh_chatAjax.cgi?"
+						 + "&command=GET"
+						 ,true);
+	
+	XMLHttp.onreadystatechange=function() {
+	document.getElementById('response_area').innerHTML = XMLHttp.responseText;;
+    }
+}
+
+function autoRefresh(){
+    intVar = setInterval(function(){ getResponse()}, 1000);
 }
 
 function hangUp(){
-	XMLHttp.open("GET", "/cgi-bin/ogilviethompsonh_chatCGI.cgi?"
-						 + "&killmessage=TRUE"
+	XMLHttp.open("GET", "/cgi-bin/ogilviethompsonh_chatAjax.cgi?"
+						 + "&command=KILL"
 						 ,true);
 }
+
