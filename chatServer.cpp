@@ -23,10 +23,12 @@ string send_fifo = "messageReply";
 
 int main() {
   vector<string> chatLog;
+  string userMessage;
   
 // create the FIFOs for communication
   Fifo recfifo(receive_fifo);
   Fifo sendfifo(send_fifo); 
+  int userNum = 0;
   
   while (1) {
 
@@ -34,6 +36,25 @@ int main() {
     recfifo.openread();
     string inMessage = recfifo.recv();
 	recfifo.fifoclose();
+	
+	if (inMessage.find("$User") == 0){
+		userNum++;
+		if(userNum <= 2){
+			string message = inMessage.substr(1);
+			cout << "Current Users: " << userNum << endl;
+			cout << message << endl;
+			userMessage = "good on users bro";
+			sendfifo.openwrite();
+			sendfifo.send(userMessage);
+			sendfifo.fifoclose();
+		} else{
+			userMessage = "Too many users";
+			sendfifo.openwrite();
+			sendfifo.send(userMessage);
+			sendfifo.fifoclose();
+			
+		}
+	}
 	
 	if (inMessage.find("**SEND**") == 0){
 		string message = inMessage.substr(8);

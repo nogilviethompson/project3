@@ -22,14 +22,25 @@ int main() {
   
   cout << "Please enter a username: ";
   getline (cin, username);
+  string userString = "$User "+username+" has joined the chat";
+  sendfifo.openwrite();
+  sendfifo.send(userString);
+  sendfifo.fifoclose();
+  recfifo.openread();
+  reply = recfifo.recv();
+  cout << reply << endl;
+  recfifo.fifoclose();
   
   while (username.find("~!&") != string::npos)
   {
 	  cout << "Sorry, but usernames cannot contain the characters '~!&' " << endl << "Please enter a username: ";
 	  cin >> username;
   }
-  
   while(1){
+    if(reply == "Too many users"){
+    	cout << "chat is closed for now";
+    	return 0;
+    }
    	cout << "Enter a message: ";
    	getline(cin, word);
    	word = "**SEND**"+username+": "+word;

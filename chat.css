@@ -1,0 +1,25 @@
+html {
+    background-color: #A0D6E1;
+}
+
+title {
+    text-shadow: 3px, 2px, black;
+    color: #65647C;
+    text-align: center;
+    text-decoration: underline;
+    font-family: "Helvetica";
+}
+
+h1 {
+    font-family: "Garamond";
+    color: #053148;
+    text-align: center;
+}
+
+#response_area {
+    background-color  #65647C;
+    border: 2px solid black:
+    outline-width: thick;
+    outline-color: black;
+    margin: 0px 10px 0px 220px;
+}

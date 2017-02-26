@@ -22,7 +22,7 @@ function sendMessage(){
 	var message = document.getElementById('message').value;
 	var com = 'SEND';
 	
-    XMLHttp.open("GET", "/cgi-bin/ogilviethompsonh_chatAjax.cgi?"
+    XMLHttp.open("GET", "/cgi-bin/grigullb_chatAjax.cgi?"
 						 + "&command=" + com
 						 + "&username=" + uname
 						 + "&message=" + message
@@ -34,7 +34,7 @@ function sendMessage(){
 function getResponse(){
 	var com = 'GET';
 	
-	XMLHttp.open("GET", "/cgi-bin/ogilviethompsonh_chatAjax.cgi?"
+	XMLHttp.open("GET", "/cgi-bin/grigullb_chatAjax.cgi?"
 						 + "&command=" + com
 						 ,true);
 	
@@ -53,7 +53,7 @@ function autoRefresh(){
 function hangUp(){
 	clearInterval(intVar);
 	var com = 'KILL';
-	XMLHttp.open("GET", "/cgi-bin/ogilviethompsonh_chatAjax.cgi?"
+	XMLHttp.open("GET", "/cgi-bin/grigullb_chatAjax.cgi?"
 						 + "&command=" + com
 						 ,true);
 }
