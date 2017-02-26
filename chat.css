@@ -1,19 +1,59 @@
 html {
-    background-color: #A0D6E1;
-}
-
-title {
-    text-shadow: 3px, 2px, black;
-    color: #65647C;
-    text-align: center;
-    text-decoration: underline;
-    font-family: "Helvetica";
+    background-color: #65647C;
 }
 
 h1 {
-    font-family: "Garamond";
-    color: #053148;
+    text-shadow: 3px, 2px, black;
+    color: #2F112F;
     text-align: center;
+    text-decoration: underline;
+    font-family: "Garamond";
+}
+
+h2 {
+text-shadow: 3px, 2px, black;
+color: #2F112F;
+font-family: "Garamond";
+}
+
+
+p {
+    color: #DEB7DE;
+    text-align: center;
+    font-family: "Helvetica"
+    }
+
+/*#buttons {
+width: 100px;
+height: 40px; 
+color: #DEB7DE; 
+border: 1px, solid, #DEB7DE;
+font-family: "Helvetica";
+text-align: center;
+margin: 30px 10px 0px 220px;
+}*/
+
+#uname {
+width: 150px;
+height: 40px; 
+color: #DEB7DE;
+background-color: black; 
+border: 1px, solid, #DEB7DE;
+font-family: "Helvetica";
+text-align: center;
+div {
+overflow: auto; }
+}
+
+#message {
+width: 450px;
+height: 90px; 
+color: #DEB7DE;
+background-color: black; 
+border: 1px, solid, #DEB7DE;
+font-family: "Helvetica";
+text-align: center;
+overflow: scroll; 
 }
 
 #response_area {
@@ -21,5 +61,5 @@ h1 {
     border: 2px solid black:
     outline-width: thick;
     outline-color: black;
-    margin: 0px 10px 0px 220px;
+    margin: 30px 10px 0px 220px;
 }

@@ -1,6 +1,7 @@
+
 <html>
-<head>
-<link rel="stylesheet" type="text/css" href="chat.css">
+  <head>
+    <link rel="stylesheet" type="text/css" href="chat.css">
 <title>Crash Chat</title>
 <META AUTHOR="HNOT, JA, YX, and BG">
 </head>
@@ -11,14 +12,17 @@
 
 <body onload="init()" onunload="hangUp()">
 <h1>Software Development - Chat Program</h1>
-<br>Written by Jessie Alperin, Bennett Grigull, Nicky Ogilvie-Thompson, and Yanqi Xu</br>
+<p><br>Written by Jessie Alperin, Bennett Grigull, Nicky Ogilvie-Thompson, and Yanqi Xu</br></p>
 
 </tr>
 </table>
 
 <hr>
-Please enter a username: 
+<h2>
+Please enter a username: </h2>
+<div id="uname">
 <input name="uname" type="text" id=uname maxlength=30></td>
+</div>
 
 <p>
   <input type="button" onclick="javascript: checkName()" name="Check" value="Submit" />
@@ -28,13 +32,18 @@ Please enter a username:
 </div>
 
 <hr>
-Type a message: 
+<h2> Type a message:  </h2>
+<div id= "message">
 <input name="message" type="text" id=message maxlength=140 disabled></td>
+</div>
 
 <p>
+<div id="buttons">
   <input type="button" onclick="javascript: sendMessage ()" name="Send" value="Send" />
   <input type="button" onclick="javascript: autoRefresh ()" name="Get Response" value="Get Response" />
   <input type="button" onclick="javascript: hangUp ()" name="Hang Up" value="Hang Up" />
+</div>
+
 </p>
 <div id = "response_area">
 </div>
@@ -44,8 +53,5 @@ Type a message:
 
 </body>
 </html>
-
-
-
 
 
