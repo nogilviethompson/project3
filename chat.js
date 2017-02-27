@@ -1,6 +1,10 @@
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+
+>>>>>>> d61db7679a6a66beda9f0c467b363de8754e35ba
 =======
 
 >>>>>>> d61db7679a6a66beda9f0c467b363de8754e35ba
@@ -25,6 +29,7 @@ function checkName() {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 	var com = 'USER';
 	XMLHttp.open("GET", "/cgi-bin/ogilviethompsonh_chatAjax.cgi?"
 						 + "&command=" + com
@@ -44,12 +49,17 @@ function checkName() {
 >>>>>>> d61db7679a6a66beda9f0c467b363de8754e35ba
 =======
 >>>>>>> d61db7679a6a66beda9f0c467b363de8754e35ba
+=======
+>>>>>>> d61db7679a6a66beda9f0c467b363de8754e35ba
 
 	document.getElementById('uname').disabled = true;
 	document.getElementById('username_show').innerHTML = 'Your username is '+uname;
 	document.getElementById('message').disabled = false;
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> d61db7679a6a66beda9f0c467b363de8754e35ba
+=======
 >>>>>>> d61db7679a6a66beda9f0c467b363de8754e35ba
 =======
 >>>>>>> d61db7679a6a66beda9f0c467b363de8754e35ba
@@ -65,7 +75,11 @@ function sendMessage(){
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     XMLHttp.open("GET", "/cgi-bin/ogilviethompsonh_chatAjax.cgi?"
+=======
+    XMLHttp.open("GET", "/cgi-bin/grigullb_chatAjax.cgi?"
+>>>>>>> d61db7679a6a66beda9f0c467b363de8754e35ba
 =======
     XMLHttp.open("GET", "/cgi-bin/grigullb_chatAjax.cgi?"
 >>>>>>> d61db7679a6a66beda9f0c467b363de8754e35ba
@@ -89,7 +103,11 @@ function getResponse(){
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 	XMLHttp.open("GET", "/cgi-bin/ogilviethompsonh_chatAjax.cgi?"
+=======
+	XMLHttp.open("GET", "/cgi-bin/grigullb_chatAjax.cgi?"
+>>>>>>> d61db7679a6a66beda9f0c467b363de8754e35ba
 =======
 	XMLHttp.open("GET", "/cgi-bin/grigullb_chatAjax.cgi?"
 >>>>>>> d61db7679a6a66beda9f0c467b363de8754e35ba
@@ -114,6 +132,7 @@ function autoRefresh(){
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
     var intVar = setInterval(function(){ getResponse()}, 2000);
 }
 
@@ -124,6 +143,8 @@ function hangUp(){
 						 ,true);
 }
 =======
+=======
+>>>>>>> d61db7679a6a66beda9f0c467b363de8754e35ba
 =======
 >>>>>>> d61db7679a6a66beda9f0c467b363de8754e35ba
 =======
@@ -141,6 +162,9 @@ function hangUp(){
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> d61db7679a6a66beda9f0c467b363de8754e35ba
+=======
 >>>>>>> d61db7679a6a66beda9f0c467b363de8754e35ba
 =======
 >>>>>>> d61db7679a6a66beda9f0c467b363de8754e35ba

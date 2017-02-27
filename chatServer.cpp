@@ -16,7 +16,10 @@ using namespace std;
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> d61db7679a6a66beda9f0c467b363de8754e35ba
 =======
 >>>>>>> d61db7679a6a66beda9f0c467b363de8754e35ba
 =======
@@ -27,6 +30,9 @@ void clearChatLog (vector<string>& chatLog);
 
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> d61db7679a6a66beda9f0c467b363de8754e35ba
+=======
 >>>>>>> d61db7679a6a66beda9f0c467b363de8754e35ba
 =======
 >>>>>>> d61db7679a6a66beda9f0c467b363de8754e35ba
@@ -55,6 +61,7 @@ int main() {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 	if (inMessage.find("USER") == 0){
 		userNum = userNum+1;
 		cout << "Current Users: " << userNum << endl;
@@ -62,6 +69,8 @@ int main() {
 			userMessage = "Connected";
 			cout << userMessage << endl;
 =======
+=======
+>>>>>>> d61db7679a6a66beda9f0c467b363de8754e35ba
 =======
 >>>>>>> d61db7679a6a66beda9f0c467b363de8754e35ba
 =======
@@ -75,6 +84,9 @@ int main() {
 			userMessage = "good on users bro";
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> d61db7679a6a66beda9f0c467b363de8754e35ba
+=======
 >>>>>>> d61db7679a6a66beda9f0c467b363de8754e35ba
 =======
 >>>>>>> d61db7679a6a66beda9f0c467b363de8754e35ba
@@ -84,6 +96,7 @@ int main() {
 			sendfifo.send(userMessage);
 			sendfifo.fifoclose();
 		} else{
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -103,6 +116,8 @@ int main() {
 >>>>>>> d61db7679a6a66beda9f0c467b363de8754e35ba
 =======
 >>>>>>> d61db7679a6a66beda9f0c467b363de8754e35ba
+=======
+>>>>>>> d61db7679a6a66beda9f0c467b363de8754e35ba
 			userMessage = "Too many users";
 			sendfifo.openwrite();
 			sendfifo.send(userMessage);
@@ -115,6 +130,9 @@ int main() {
 		string message = inMessage.substr(8);
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> d61db7679a6a66beda9f0c467b363de8754e35ba
+=======
 >>>>>>> d61db7679a6a66beda9f0c467b363de8754e35ba
 =======
 >>>>>>> d61db7679a6a66beda9f0c467b363de8754e35ba
@@ -124,6 +142,7 @@ int main() {
 		chatLog.push_back(message);
 	}
 	
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -141,6 +160,8 @@ int main() {
 >>>>>>> d61db7679a6a66beda9f0c467b363de8754e35ba
 =======
 >>>>>>> d61db7679a6a66beda9f0c467b363de8754e35ba
+=======
+>>>>>>> d61db7679a6a66beda9f0c467b363de8754e35ba
 	if (inMessage.find("**KILL**") == 0){
 		chatLog.clear();
 	}
@@ -148,6 +169,9 @@ int main() {
 	if (inMessage.find("**GET**") == 0){
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> d61db7679a6a66beda9f0c467b363de8754e35ba
+=======
 >>>>>>> d61db7679a6a66beda9f0c467b363de8754e35ba
 =======
 >>>>>>> d61db7679a6a66beda9f0c467b363de8754e35ba

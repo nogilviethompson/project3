@@ -43,6 +43,7 @@ int main() {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  string full = stCommand+stUname+": "+stMessage;
 	  sendfifo.openwrite();
 	  sendfifo.send(full);
@@ -52,6 +53,8 @@ int main() {
 	sendfifo.openwrite();
 	sendfifo.send(stCommand);
 =======
+=======
+>>>>>>> d61db7679a6a66beda9f0c467b363de8754e35ba
 =======
 >>>>>>> d61db7679a6a66beda9f0c467b363de8754e35ba
 =======
@@ -68,6 +71,9 @@ int main() {
 	sendfifo.send(signal);
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> d61db7679a6a66beda9f0c467b363de8754e35ba
+=======
 >>>>>>> d61db7679a6a66beda9f0c467b363de8754e35ba
 =======
 >>>>>>> d61db7679a6a66beda9f0c467b363de8754e35ba
@@ -80,9 +86,15 @@ int main() {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 		reply = reply + "<p>";
 		cout<< reply << endl;
 		reply = recfifo.recv();
+=======
+	reply = reply + "<p>";
+	cout<< reply << endl;
+	reply = recfifo.recv();
+>>>>>>> d61db7679a6a66beda9f0c467b363de8754e35ba
 =======
 	reply = reply + "<p>";
 	cout<< reply << endl;
@@ -105,6 +117,7 @@ int main() {
   }
   
   if (stCommand == "KILL"){
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -134,12 +147,17 @@ int main() {
 >>>>>>> d61db7679a6a66beda9f0c467b363de8754e35ba
 =======
 >>>>>>> d61db7679a6a66beda9f0c467b363de8754e35ba
+=======
+>>>>>>> d61db7679a6a66beda9f0c467b363de8754e35ba
 	  string signal = "**KILL**";
 	  sendfifo.openwrite();
 	  sendfifo.send(signal);
   }
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> d61db7679a6a66beda9f0c467b363de8754e35ba
+=======
 >>>>>>> d61db7679a6a66beda9f0c467b363de8754e35ba
 =======
 >>>>>>> d61db7679a6a66beda9f0c467b363de8754e35ba
@@ -153,7 +171,11 @@ int main() {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
   }
+=======
+  }
+>>>>>>> d61db7679a6a66beda9f0c467b363de8754e35ba
 =======
   }
 >>>>>>> d61db7679a6a66beda9f0c467b363de8754e35ba

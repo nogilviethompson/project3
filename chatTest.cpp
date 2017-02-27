@@ -25,7 +25,10 @@ int main() {
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> d61db7679a6a66beda9f0c467b363de8754e35ba
 =======
 >>>>>>> d61db7679a6a66beda9f0c467b363de8754e35ba
 =======
@@ -40,6 +43,9 @@ int main() {
   recfifo.fifoclose();
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> d61db7679a6a66beda9f0c467b363de8754e35ba
+=======
 >>>>>>> d61db7679a6a66beda9f0c467b363de8754e35ba
 =======
 >>>>>>> d61db7679a6a66beda9f0c467b363de8754e35ba
@@ -51,6 +57,7 @@ int main() {
 	  cout << "Sorry, but usernames cannot contain the characters '~!&' " << endl << "Please enter a username: ";
 	  cin >> username;
   }
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -69,6 +76,8 @@ int main() {
 >>>>>>> d61db7679a6a66beda9f0c467b363de8754e35ba
 =======
 >>>>>>> d61db7679a6a66beda9f0c467b363de8754e35ba
+=======
+>>>>>>> d61db7679a6a66beda9f0c467b363de8754e35ba
   while(1){
     if(reply == "Too many users"){
     	cout << "chat is closed for now";
@@ -79,6 +88,9 @@ int main() {
    	word = "**SEND**"+username+": "+word;
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
+>>>>>>> d61db7679a6a66beda9f0c467b363de8754e35ba
+=======
 >>>>>>> d61db7679a6a66beda9f0c467b363de8754e35ba
 =======
 >>>>>>> d61db7679a6a66beda9f0c467b363de8754e35ba
