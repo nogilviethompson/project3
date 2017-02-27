@@ -2,23 +2,7 @@
 # For CSC3004 Software Development
 
 # Put your user name below:
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
 USER= ogilviethompsonh
-=======
-USER= grigullb
->>>>>>> d61db7679a6a66beda9f0c467b363de8754e35ba
-=======
-USER= grigullb
->>>>>>> d61db7679a6a66beda9f0c467b363de8754e35ba
-=======
-USER= grigullb
->>>>>>> d61db7679a6a66beda9f0c467b363de8754e35ba
-=======
-USER= grigullb
->>>>>>> d61db7679a6a66beda9f0c467b363de8754e35ba
 
 CC= g++
 
@@ -63,6 +47,7 @@ PutCGI: chatAjax
 PutHTML:
 	cp chat.html /var/www/html/class/softdev/$(USER)
 	cp chat.js /var/www/html/class/softdev/$(USER)
+	cp chat.css /var/www/html/class/softdev/$(USER)
 
 	echo "Current contents of your HTML directory: "
 	ls -l /var/www/html/class/softdev/$(USER)

@@ -1,19 +1,3 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-
->>>>>>> d61db7679a6a66beda9f0c467b363de8754e35ba
-=======
-
->>>>>>> d61db7679a6a66beda9f0c467b363de8754e35ba
-=======
-
->>>>>>> d61db7679a6a66beda9f0c467b363de8754e35ba
-=======
-
->>>>>>> d61db7679a6a66beda9f0c467b363de8754e35ba
 var XMLHttp;
 
 function init() {
@@ -24,71 +8,24 @@ function init() {
     }
 }
 
-function checkName() {
-    var uname = document.getElementById('uname').value;
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
+function user(){
 	var com = 'USER';
+	var uname = document.getElementById('uname').value;
 	XMLHttp.open("GET", "/cgi-bin/ogilviethompsonh_chatAjax.cgi?"
 						 + "&command=" + com
 						 + "&username=" + uname
 						 ,true);
 						 
 	XMLHttp.onreadystatechange=function() {
-	document.getElementById('username_show').innerHTML = XMLHttp.responseText;
-    }
-	
-	document.getElementById('uname').disabled = true;
-	document.getElementById('message').disabled = false;
-	document.getElementById('unameButton').style.visibility = "hidden";
-	autoRefresh();
-=======
-=======
->>>>>>> d61db7679a6a66beda9f0c467b363de8754e35ba
-=======
->>>>>>> d61db7679a6a66beda9f0c467b363de8754e35ba
-=======
->>>>>>> d61db7679a6a66beda9f0c467b363de8754e35ba
-
-	document.getElementById('uname').disabled = true;
-	document.getElementById('username_show').innerHTML = 'Your username is '+uname;
-	document.getElementById('message').disabled = false;
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> d61db7679a6a66beda9f0c467b363de8754e35ba
-=======
->>>>>>> d61db7679a6a66beda9f0c467b363de8754e35ba
-=======
->>>>>>> d61db7679a6a66beda9f0c467b363de8754e35ba
-=======
->>>>>>> d61db7679a6a66beda9f0c467b363de8754e35ba
+	document.getElementById('connect').innerHTML = XMLHttp.responseText;
+	}
 }
 
 function sendMessage(){
 	var uname = document.getElementById('uname').value;
 	var message = document.getElementById('message').value;
 	var com = 'SEND';
-	
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
     XMLHttp.open("GET", "/cgi-bin/ogilviethompsonh_chatAjax.cgi?"
-=======
-    XMLHttp.open("GET", "/cgi-bin/grigullb_chatAjax.cgi?"
->>>>>>> d61db7679a6a66beda9f0c467b363de8754e35ba
-=======
-    XMLHttp.open("GET", "/cgi-bin/grigullb_chatAjax.cgi?"
->>>>>>> d61db7679a6a66beda9f0c467b363de8754e35ba
-=======
-    XMLHttp.open("GET", "/cgi-bin/grigullb_chatAjax.cgi?"
->>>>>>> d61db7679a6a66beda9f0c467b363de8754e35ba
-=======
-    XMLHttp.open("GET", "/cgi-bin/grigullb_chatAjax.cgi?"
->>>>>>> d61db7679a6a66beda9f0c467b363de8754e35ba
 						 + "&command=" + com
 						 + "&username=" + uname
 						 + "&message=" + message
@@ -99,24 +36,7 @@ function sendMessage(){
 
 function getResponse(){
 	var com = 'GET';
-	
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
 	XMLHttp.open("GET", "/cgi-bin/ogilviethompsonh_chatAjax.cgi?"
-=======
-	XMLHttp.open("GET", "/cgi-bin/grigullb_chatAjax.cgi?"
->>>>>>> d61db7679a6a66beda9f0c467b363de8754e35ba
-=======
-	XMLHttp.open("GET", "/cgi-bin/grigullb_chatAjax.cgi?"
->>>>>>> d61db7679a6a66beda9f0c467b363de8754e35ba
-=======
-	XMLHttp.open("GET", "/cgi-bin/grigullb_chatAjax.cgi?"
->>>>>>> d61db7679a6a66beda9f0c467b363de8754e35ba
-=======
-	XMLHttp.open("GET", "/cgi-bin/grigullb_chatAjax.cgi?"
->>>>>>> d61db7679a6a66beda9f0c467b363de8754e35ba
 						 + "&command=" + com
 						 ,true);
 	
@@ -129,44 +49,24 @@ function getResponse(){
 var intVar
 
 function autoRefresh(){
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
     var intVar = setInterval(function(){ getResponse()}, 2000);
-}
-
-function hangUp(){
-	var com = 'KILL';
-	XMLHttp.open("GET", "/cgi-bin/ogilviethompsonh_chatAjax.cgi?"
-						 + "&command=" + com
-						 ,true);
-}
-=======
-=======
->>>>>>> d61db7679a6a66beda9f0c467b363de8754e35ba
-=======
->>>>>>> d61db7679a6a66beda9f0c467b363de8754e35ba
-=======
->>>>>>> d61db7679a6a66beda9f0c467b363de8754e35ba
-    var intVar = setInterval(function(){ getResponse()}, 10000);
 }
 
 function hangUp(){
 	clearInterval(intVar);
 	var com = 'KILL';
-	XMLHttp.open("GET", "/cgi-bin/grigullb_chatAjax.cgi?"
+	XMLHttp.open("GET", "/cgi-bin/ogilviethompsonh_chatAjax.cgi?"
 						 + "&command=" + com
 						 ,true);
 }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
->>>>>>> d61db7679a6a66beda9f0c467b363de8754e35ba
-=======
->>>>>>> d61db7679a6a66beda9f0c467b363de8754e35ba
-=======
->>>>>>> d61db7679a6a66beda9f0c467b363de8754e35ba
-=======
->>>>>>> d61db7679a6a66beda9f0c467b363de8754e35ba
+function checkName() {
+    var uname = document.getElementById('uname').value;
+	
+	document.getElementById('uname').disabled = true;
+	document.getElementById('message').disabled = false;
+	document.getElementById('unameButton').style.visibility = "hidden";
+	document.getElementById('username_show').innerHTML = "Your username is "+uname;
+	user();
+	autoRefresh();
+}

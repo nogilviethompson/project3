@@ -29,23 +29,7 @@
 #define MESSTERM '\n'
 #define PATH "/tmp/"
   // SIGniture assures the pipe is unique amoung users
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
 #define SIG "ogilviethompsonh_"
-=======
-#define SIG "grigullb_"
->>>>>>> d61db7679a6a66beda9f0c467b363de8754e35ba
-=======
-#define SIG "grigullb_"
->>>>>>> d61db7679a6a66beda9f0c467b363de8754e35ba
-=======
-#define SIG "grigullb_"
->>>>>>> d61db7679a6a66beda9f0c467b363de8754e35ba
-=======
-#define SIG "grigullb_"
->>>>>>> d61db7679a6a66beda9f0c467b363de8754e35ba
 
 using namespace std;
 
