@@ -43,6 +43,7 @@ int main() {
 	  string full = stCommand+stUname+": "+stMessage;
 	  sendfifo.openwrite();
 	  sendfifo.send(full);
+	  cout << "Content-Type: text/plain\n\n";
   }
   
   if (stCommand == "GET"){
@@ -63,7 +64,8 @@ int main() {
   
   if (stCommand == "KILL"){
 	  sendfifo.openwrite();
-	  sendfifo.send(stCommand);	  
+	  sendfifo.send(stCommand);
+	  cout << "Content-Type: text/plain\n\n";
   }
   
   if (stCommand == "USER"){
