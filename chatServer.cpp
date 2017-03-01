@@ -52,6 +52,13 @@ int main() {
 		}
 	}
 	
+	if (inMessage.find("REMOVE") == 0){
+		userNum = userNum-1;
+		string message = inMessage.substr(6);
+		cout << "Removed User " << message << " - Current Users: " << userNum << endl;
+		
+	}
+	
 	if (inMessage.find("SEND") == 0){
 		string message = inMessage.substr(4);
 		cout << "Received - " << message << endl;

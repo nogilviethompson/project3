@@ -65,7 +65,14 @@ int main() {
 	  sendfifo.openwrite();
 	  sendfifo.send(stCommand);	  
   }
-  
+  if (stCommand == "REMOVE"){
+      sendfifo.openwrite();
+      form_iterator uname = cgi.getElement("username");
+	  string stUname = **uname;
+	  string full = stCommand+stUname;
+	  sendfifo.send(full);
+	  
+  }
   if (stCommand == "USER"){
 	string send = "USER";
 	sendfifo.openwrite();
