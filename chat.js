@@ -46,8 +46,11 @@ function getResponse(){
 						 ,true);
 	
 	XMLHttp.onreadystatechange=function() {
-	document.getElementById('response_area').innerHTML = XMLHttp.responseText;;
-    }
+		console.log(XMLHttp.readyState);
+		if(XMLHttp.readyState == 4){
+			document.getElementById('response_area').innerHTML = XMLHttp.responseText;
+		}
+	}
 	XMLHttp.send(null);
 }
 
