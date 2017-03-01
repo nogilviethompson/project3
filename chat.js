@@ -26,7 +26,6 @@ function user(){
 				clearInterval(intVar);
 				document.getElementById('hangUpButton').disabled = true;
 			}
-		    console.log("Chat room full message:"+XMLHttp.responseText);
 		}
 	}
 	XMLHttp.send(null);
@@ -78,7 +77,10 @@ function removeUser(){
 	document.getElementById('unameButton').style.visibility = "visible";
 	document.getElementById('uname').disabled = false;
 	document.getElementById('message').disabled = true;
+<<<<<<< HEAD
 	document.getElementById('hangUpButton').disabled = true;
+=======
+>>>>>>> fd8a3443e0335919fa678351c31e75ce28abc3a8
 	var com = 'REMOVE';
 	var uname = document.getElementById('uname').value;
 	XMLHttp.open("GET", "/cgi-bin/ogilviethompsonh_chatAjax.cgi?"
@@ -93,7 +95,10 @@ function checkName() {
     var uname = document.getElementById('uname').value;
 	document.getElementById('uname').disabled = true;
 	document.getElementById('message').disabled = false;
+<<<<<<< HEAD
 	document.getElementById('hangUpButton').disabled = false;
+=======
+>>>>>>> fd8a3443e0335919fa678351c31e75ce28abc3a8
 	document.getElementById('unameButton').style.visibility = "hidden";
 	document.getElementById('username_show').innerHTML = "Your username is "+uname;
 	autoRefresh();
@@ -101,10 +106,13 @@ function checkName() {
 }
 
 function kill(){
+<<<<<<< HEAD
 	if (docdocument.getElementById('hangUpButton').disabled){
 		return
 	}
 	
+=======
+>>>>>>> fd8a3443e0335919fa678351c31e75ce28abc3a8
 	var com = 'KILL';
 	XMLHttp.open("GET", "/cgi-bin/ogilviethompsonh_chatAjax.cgi?"
 						 + "&command=" + com

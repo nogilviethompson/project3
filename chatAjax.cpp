@@ -27,15 +27,13 @@ int main() {
   char *cstr;
   string reply;
   
-  
   Fifo recfifo(receive_fifo);
   Fifo sendfifo(send_fifo);
   
   // Create AJAX objects to recieve information from web page.
   form_iterator command = cgi.getElement("command");
   string stCommand = **command;
-  cout << "Content-Type: text/plain\n\n";
-  
+  cout << "Content-Type: text/plain\n\n";  
   if (stCommand == "SEND")
   {
 	  form_iterator uname = cgi.getElement("username");
@@ -88,7 +86,7 @@ int main() {
       sendfifo.openwrite();
       sendfifo.send(stCommand);
    }
-  
+   
 	sendfifo.fifoclose();
 	recfifo.fifoclose();
   
