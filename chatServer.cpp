@@ -58,9 +58,10 @@ int main() {
 		chatLog.push_back(message);
 	}
 	
-	if (inMessage.find("KILL") == 0){
-		userNum=userNum-1;
-		cout << "Current Users: " << userNum << endl;
+	if (inMessage.find("REMOVE") == 0){
+		userNum = userNum-1;
+		string message = inMessage.substr(6);
+		cout << "Removed User " << message << " - Current Users: " << userNum << endl;
 		if (userNum == 0){
 			chatLog.clear();
 		}

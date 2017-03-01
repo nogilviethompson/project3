@@ -54,7 +54,7 @@ int main() {
 	reply = recfifo.recv();
 	while(reply.find("$END") == -1){
 		reply = reply + "<p>";
-		cout<< reply << endl;
+		cout<< reply;
 		reply = recfifo.recv();
 		if (reply.find("$END") != -1){
 			cout<< reply.substr(0,reply.find("$END")) << endl;
@@ -62,9 +62,12 @@ int main() {
 	}
   }
   
-  if (stCommand == "KILL"){
-	  sendfifo.openwrite();
-	  sendfifo.send(stCommand);
+ if (stCommand == "REMOVE"){
+      sendfifo.openwrite();
+      form_iterator uname = cgi.getElement("username");
+	  string stUname = **uname;
+	  string full = stCommand+stUname;
+	  sendfifo.send(full);
 	  cout << "Content-Type: text/plain\n\n";
   }
   
@@ -75,14 +78,11 @@ int main() {
 	cout << "Content-Type: text/plain\n\n";
 	recfifo.openread();
 	reply = recfifo.recv();
+	if (reply == "Full"){
+		cout << "Sorry, but the chatroom is full";
+	}
 	if (reply == "Connected"){
-		form_iterator uname = cgi.getElement("username");
-		string stUname = **uname;
-		string outMessage = "Your username is " + stUname + ". You are now connected: ";
-		cout << outMessage << endl;
-	} else if (reply == "Full"){
-		string outMessage = "Sorry, but the chatroom is full";
-		cout << outMessage << endl;
+		cout << "You are connected";
 	}
   }  
   

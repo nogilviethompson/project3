@@ -10,37 +10,38 @@
 <script type = "text/javascript" src="chat.js">
 </script>
 
-<body onload="init()" onunload="hangUp()">
+<body onload="init()">
 <h1>Software Development - Chat Program</h1>
 
 <p><br>Written by Jessie Alperin, Bennett Grigull, Nicky Ogilvie-Thompson, and Yanqi Xu</br></p>
 
+<form name="usernameForm">
 <h2>Please enter a username:</h2> 
-<input name="uname" type="text" id=uname maxlength=30></td>
-
+<input name="unameInput" type="text" id=uname maxlength=30></td>
 <p>
-  <input type="button" id=unameButton onclick="javascript: checkName()" name="Check" value="Submit" />
+  <input type="button" id=unameButton onclick="checkName()" name="Check" value="Submit" />
 </p>
-
 <div id = "username_show">
 </div>
 <div id = "connect">
 </div>
+</form>
 
 <hr>
+<form name="chatForm">
 <h2> Type a message:  </h2>
-<p><input name="message" type="text" id=message maxlength=140 disabled></td></p>
+<p><input name="textInput" type="text" id=message maxlength=140 disabled></td></p>
 
 <p>
 <div id="buttons">
-  <input type="button" onclick="javascript: sendMessage ()" name="Send" value="Send" />
-  <input type="button" onclick="javascript: hangUp ()" name="Hang Up" value="Hang Up" />
+  <input type="button" onclick="sendMessage ()" name="Send" value="Send" />
+  <input type="button" onclick="removeUser ()" name="Hang Up" value="Hang Up" />
 </div>
 </p>
+</form>
 <div id = "response_area">
 </div>
 <div id = "hangUp">
 </div>
 </body>
 </html>
-
