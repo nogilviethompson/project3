@@ -25,6 +25,7 @@ function user(){
 				document.getElementById('message').disabled = true;
 				clearInterval(intVar);
 			}
+		    console.log("Chat room full message:"+XMLHttp.responseText);
 		}
 	}
 	XMLHttp.send(null);
@@ -59,6 +60,7 @@ function getResponse(){
 		if(XMLHttp.readyState == 4){
 			document.getElementById('response_area').innerHTML = XMLHttp.responseText;
 			sendBusy = false;
+		    console.log("Get Message response:"+XMLHttp.responseText);
 		}
 	}
 	XMLHttp.send(null);
@@ -93,4 +95,12 @@ function checkName() {
 	document.getElementById('username_show').innerHTML = "Your username is "+uname;
 	autoRefresh();
 	user();
+}
+
+function kill(){
+	var com = 'KILL';
+	XMLHttp.open("GET", "/cgi-bin/ogilviethompsonh_chatAjax.cgi?"
+						 + "&command=" + com
+						 ,true);
+	XMLHttp.send(null);
 }
