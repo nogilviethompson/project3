@@ -10,7 +10,7 @@
 <script type = "text/javascript" src="chat.js">
 </script>
 
-<body onload="init()">
+<body onload="init()" onunload="removeUser()">
 <h1>Software Development - Chat Program</h1>
 
 <p><br>Written by Jessie Alperin, Bennett Grigull, Nicky Ogilvie-Thompson, and Yanqi Xu</br></p>
@@ -19,12 +19,7 @@
 <h2>Please enter a username:</h2> 
 <input name="unameInput" type="text" id=uname maxlength=30></td>
 <p>
-<<<<<<< HEAD
   <input type="button" id=unameButton onclick="checkName()" name="Check" value="Submit" />
-=======
-  <input type="button" id=unameButton onclick="javascript: checkName()" onclick="javascript: user()" name="Check" value="Submit" />
-  <input type="button" onclick="javascript: removeUser()" onclick="javascript: user()" name="Check" value="Leave Chat" />
->>>>>>> 9c1b37d0b16c225e4750ffd92ff91319fc1ca18f
 </p>
 <div id = "username_show">
 </div>
