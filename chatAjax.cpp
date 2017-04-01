@@ -69,7 +69,9 @@ int main() {
   }
   
   if (stCommand == "USER"){
-	string send = "USER";
+    form_iterator uname = cgi.getElement("username");
+    string stUname = **uname;
+	string send = "USER "+stUname;
 	sendfifo.openwrite();
 	sendfifo.send(send);
 	recfifo.openread();

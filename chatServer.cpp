@@ -16,10 +16,26 @@ using namespace std;
 /* Fifo names */
 string receive_fifo = "messageRequest";
 string send_fifo = "messageReply";
+class chatroom
+{
+public:
+    chatroom(); //Default constructor
+	chatroom(string name, string creator);
+	void addMessageToChat(string message);
+	void displayChat(Fifo sendfifo);
+	void clearChat();
+	void addUser(string uname);
+private:
+    string admin;
+    vector<string> users;
+    string chatname;
+    vector<string> chatLog;
+};
 
 int main() {
-  vector<string> chatLog;
+  
   string userMessage;
+  chatroom chat;
   
 // create the FIFOs for communication
   Fifo recfifo(receive_fifo);
@@ -35,6 +51,8 @@ int main() {
 	
 	if (inMessage.find("USER") == 0){
 		userNum = userNum+1;
+		string username = inMessage.substr(5);
+		chat.addUser(username);
 		cout << "Current Users: " << userNum << endl;
 		if(userNum <= 2){
 			userMessage = "Connected";
@@ -55,7 +73,7 @@ int main() {
 	if (inMessage.find("SEND") == 0){
 		string message = inMessage.substr(4);
 		cout << "Received - " << message << endl;
-		chatLog.push_back(message);
+		chat.addMessageToChat(message);
 	}
 	
 	if (inMessage.find("REMOVE") == 0){
@@ -63,18 +81,12 @@ int main() {
 		string message = inMessage.substr(6);
 		cout << "Removed User " << message << " - Current Users: " << userNum << endl;
 		if (userNum == 0){
-			chatLog.clear();
+			chat.clearChat();
 		}
 	}
 	
 	if (inMessage.find("GET") == 0){
-		for (unsigned int i = 0; i < chatLog.size(); i++){
-			string outMessage = chatLog[i];
-			cout << outMessage << endl;
-			sendfifo.openwrite();
-			sendfifo.send(outMessage);
-			sendfifo.fifoclose();
-		}
+		chat.displayChat(sendfifo);
 	//After all the messages have been sent, send out the $END signal
 		string outMessage = "$END";
 		cout << outMessage << endl;
@@ -87,10 +99,37 @@ int main() {
 		userNum = userNum-1;
 		cout << "Removed User - Current Users: " << userNum << endl;
 		if (userNum == 0){
-			chatLog.clear();
+			chat.clearChat();
 		}
 	}
   }
   
   return 0;
+}
+
+chatroom::chatroom(){
+	chatname = " ";
+	admin = " ";
+}
+chatroom::chatroom(string name, string creator){
+	chatname = name;
+	admin = creator;
+}
+void chatroom::addMessageToChat(string message){
+	chatLog.push_back(message);
+}
+void chatroom::displayChat(Fifo sendfifo){
+	for (unsigned int i = 0; i < chatLog.size(); i++){
+			string outMessage = chatLog[i];
+			cout << outMessage << endl;
+			sendfifo.openwrite();
+			sendfifo.send(outMessage);
+			sendfifo.fifoclose();
+		}
+}
+void chatroom::clearChat(){
+	chatLog.clear();
+}
+void chatroom::addUser(string uname){
+	users.push_back(uname);
 }
