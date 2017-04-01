@@ -13,7 +13,7 @@ function init() {
 function user(){
 	var com = 'USER';
 	var uname = document.getElementById('uname').value;
-	XMLHttp.open("GET", "/cgi-bin/ogilviethompsonh_chatAjax.cgi?"
+	XMLHttp.open("GET", "/cgi-bin/grigullb_chatAjax.cgi?"
 						 + "&command=" + com
 						 + "&username=" + uname
 						 ,true);
@@ -41,7 +41,7 @@ function sendMessage(){
 	
 	sendBusy = true;
 	
-	XMLHttp.open("GET", "/cgi-bin/ogilviethompsonh_chatAjax.cgi?"
+	XMLHttp.open("GET", "/cgi-bin/grigullb_chatAjax.cgi?"
 						 + "&command=" + com
 						 + "&username=" + uname
 						 + "&message=" + message
@@ -52,7 +52,7 @@ function sendMessage(){
 
 function getResponse(){
 	var com = 'GET';
-	XMLHttp.open("GET", "/cgi-bin/ogilviethompsonh_chatAjax.cgi?"
+	XMLHttp.open("GET", "/cgi-bin/grigullb_chatAjax.cgi?"
 						 + "&command=" + com
 						 ,true);
 	
@@ -77,13 +77,10 @@ function removeUser(){
 	document.getElementById('unameButton').style.visibility = "visible";
 	document.getElementById('uname').disabled = false;
 	document.getElementById('message').disabled = true;
-<<<<<<< HEAD
 	document.getElementById('hangUpButton').disabled = true;
-=======
->>>>>>> fd8a3443e0335919fa678351c31e75ce28abc3a8
 	var com = 'REMOVE';
 	var uname = document.getElementById('uname').value;
-	XMLHttp.open("GET", "/cgi-bin/ogilviethompsonh_chatAjax.cgi?"
+	XMLHttp.open("GET", "/cgi-bin/grigullb_chatAjax.cgi?"
 						 + "&command=" + com
 						 + "&username=" + uname
 						 ,true);
@@ -95,10 +92,7 @@ function checkName() {
     var uname = document.getElementById('uname').value;
 	document.getElementById('uname').disabled = true;
 	document.getElementById('message').disabled = false;
-<<<<<<< HEAD
 	document.getElementById('hangUpButton').disabled = false;
-=======
->>>>>>> fd8a3443e0335919fa678351c31e75ce28abc3a8
 	document.getElementById('unameButton').style.visibility = "hidden";
 	document.getElementById('username_show').innerHTML = "Your username is "+uname;
 	autoRefresh();
@@ -106,15 +100,11 @@ function checkName() {
 }
 
 function kill(){
-<<<<<<< HEAD
 	if (docdocument.getElementById('hangUpButton').disabled){
 		return
 	}
-	
-=======
->>>>>>> fd8a3443e0335919fa678351c31e75ce28abc3a8
 	var com = 'KILL';
-	XMLHttp.open("GET", "/cgi-bin/ogilviethompsonh_chatAjax.cgi?"
+	XMLHttp.open("GET", "/cgi-bin/grigullb_chatAjax.cgi?"
 						 + "&command=" + com
 						 ,true);
 	XMLHttp.send(null);

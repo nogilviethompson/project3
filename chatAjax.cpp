@@ -51,7 +51,7 @@ int main() {
 	recfifo.openread();
 	reply = recfifo.recv();
 	while(reply.find("$END") == -1){
-		reply = reply + "<p>";
+		reply = "<p>" + reply + "</p>";
 		cout<< reply;
 		reply = recfifo.recv();
 		if (reply.find("$END") != -1){
