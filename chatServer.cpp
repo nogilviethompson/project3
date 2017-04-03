@@ -1,14 +1,4 @@
-#include <sys/types.h>
-#include <sys/wait.h>
-#include <unistd.h>
-#include <fcntl.h>
-#include <stdlib.h>
-#include <sys/stat.h>
 #include <vector>
-#include <iostream>
-#include <fstream>
-#include <vector>
-#include <algorithm>
 #include "fifo.h"
 
 using namespace std;
@@ -18,8 +8,9 @@ string receive_fifo = "messageRequest";
 string send_fifo = "messageReply";
 
 int main() {
-  vector<string> chatLog;
+  
   string userMessage;
+  chatroom chat;
   
 // create the FIFOs for communication
   Fifo recfifo(receive_fifo);
@@ -50,7 +41,6 @@ int main() {
 	
 	if (inMessage.find("SEND") == 0){
 		string message = inMessage.substr(4);
-		chatLog.push_back(message);
 	}
 	
 	if (inMessage.find("REMOVE") == 0){
@@ -59,25 +49,19 @@ int main() {
 			userNum = 0;
 		}
 		if (userNum == 0){
-			chatLog.clear();
+			chat.clearChat();
 		}
 	}
 	
 	if (inMessage.find("GET") == 0){
-		for (unsigned int i = 0; i < chatLog.size(); i++){
-			string outMessage = chatLog[i];
-			sendfifo.openwrite();
-			sendfifo.send(outMessage);
-			sendfifo.fifoclose();
-		}
 	//After all the messages have been sent, send out the $END signal
 		string outMessage = "$END";
 		sendfifo.openwrite();
 		sendfifo.send(outMessage);
 		sendfifo.fifoclose();
 	}
-	
   }
   
   return 0;
 }
+

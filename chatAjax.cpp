@@ -51,7 +51,7 @@ int main() {
 	recfifo.openread();
 	reply = recfifo.recv();
 	while(reply.find("$END") == -1){
-		reply = reply + "<p>";
+		reply = "<p>" + reply + "</p>";
 		cout<< reply;
 		reply = recfifo.recv();
 		if (reply.find("$END") != -1){
@@ -69,7 +69,9 @@ int main() {
   }
   
   if (stCommand == "USER"){
-	string send = "USER";
+    form_iterator uname = cgi.getElement("username");
+    string stUname = **uname;
+	string send = "USER "+stUname;
 	sendfifo.openwrite();
 	sendfifo.send(send);
 	recfifo.openread();
