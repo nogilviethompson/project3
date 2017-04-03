@@ -81,11 +81,6 @@ int main() {
 		cout << "You are connected";
 	}
   }
-  
-   if (stCommand == "KILL"){
-      sendfifo.openwrite();
-      sendfifo.send(stCommand);
-   }
    
 	sendfifo.fifoclose();
 	recfifo.fifoclose();
