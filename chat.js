@@ -13,7 +13,7 @@ function init() {
 function user(){
 	var com = 'USER';
 	var uname = document.getElementById('uname').value;
-	XMLHttp.open("GET", "/cgi-bin/ogilviethompsonh_chatAjax.cgi?"
+	XMLHttp.open("GET", "/cgi-bin/xuy_chatAjax.cgi?"
 						 + "&command=" + com
 						 + "&username=" + uname
 						 ,true);
@@ -41,7 +41,7 @@ function sendMessage(){
 	
 	sendBusy = true;
 	
-	XMLHttp.open("GET", "/cgi-bin/ogilviethompsonh_chatAjax.cgi?"
+	XMLHttp.open("GET", "/cgi-bin/xuy_chatAjax.cgi?"
 						 + "&command=" + com
 						 + "&username=" + uname
 						 + "&message=" + message
@@ -52,7 +52,7 @@ function sendMessage(){
 
 function getResponse(){
 	var com = 'GET';
-	XMLHttp.open("GET", "/cgi-bin/ogilviethompsonh_chatAjax.cgi?"
+	XMLHttp.open("GET", "/cgi-bin/xuy_chatAjax.cgi?"
 						 + "&command=" + com
 						 ,true);
 	
