@@ -5,20 +5,24 @@
 
 using namespace std;
 
-class chatroom
+class chatRoom
 {
-public:
-    chatroom(); //Default constructor
-	chatroom(string name, string creator);
-	void addMessageToChat(string message);
-	void displayChat(Fifo sendfifo);
-	void clearChat();
-	void addUser(string uname);
-private:
-    string admin;
-    vector<string> users;
-    string chatname;
-    vector<string> chatLog;
+	private: 
+	 string roomName;
+	 int userLimit;
+	 vector<string> chatLog;
+	 vector<string> users;
+	 
+	public:
+	 chatRoom();  //default constructor
+	 void setName(string name);
+	 string getName();
+	 void setLimit(int number);
+	 int getLimit();
+	 void addMessage (string message);
+	 void addUser(string userName);
+	 void outputChat(Fifo& sendfifo);
+	 void chatClear(); //clear the chatLog
+	 
 };
-
 #endif /* CHATROOM_H */

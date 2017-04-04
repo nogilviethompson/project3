@@ -4,34 +4,55 @@
 
 using namespace std;
 
-chatroom::chatroom(){
-	chatname = " ";
-	admin = " ";
+chatRoom::chatRoom()
+{
+	roomName="";
+	userLimit=2;
 }
 
-chatroom::chatroom(string name, string creator){
-	chatname = name;
-	admin = creator;
+void chatRoom::setName(string name)
+{
+	roomName=name;
 }
 
-void chatroom::addMessageToChat(string message){
+string chatRoom::getName()
+{
+	return(roomName);
+}
+
+void chatRoom::setLimit(int number)
+{
+	userLimit=number;
+}
+
+int chatRoom::getLimit()
+{
+	return(userLimit);
+}
+
+void chatRoom:: addMessage(string message)
+{
 	chatLog.push_back(message);
 }
 
-void chatroom::displayChat(Fifo sendfifo){
-	for (unsigned int i = 0; i < chatLog.size(); i++){
-			string outMessage = chatLog[i];
-			cout << outMessage << endl;
-			sendfifo.openwrite();
-			sendfifo.send(outMessage);
-			sendfifo.fifoclose();
-		}
+void chatRoom:: addUser(string userName)
+{
+	users.push_back(userName);
 }
 
-void chatroom::clearChat(){
-	chatLog.clear();
+void chatRoom::chatClear()
+{
+     chatLog.clear();
 }
 
-void chatroom::addUser(string uname){
-	users.push_back(uname);
+void chatRoom::outputChat(Fifo& sendfifo)
+{
+   for (unsigned int i = 0; i < chatLog.size(); i++){
+		string outMessage = chatLog[i];
+		cout << outMessage << endl;
+		sendfifo.openwrite();
+		sendfifo.send(outMessage);
+		sendfifo.fifoclose();
+	}
 }
+
