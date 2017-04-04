@@ -29,11 +29,11 @@ int chatRoom::getCurrentUsers(){
 	return(currentUsers);
 }
 
-void chatRoom:: addMessage(string message){
+void chatRoom::addMessage(string message){
 	chatLog.push_back(message);
 }
 
-void chatRoom:: addUser(string username, Fifo sendfifo){
+void chatRoom::addUser(string username, Fifo sendfifo){
 	if (currentUsers+1 > userLimit)
 	{
 		sendfifo.openwrite();
@@ -42,7 +42,7 @@ void chatRoom:: addUser(string username, Fifo sendfifo){
 	}
 	else if (currentUsers+1 <= userLimit)
 	{
-		users.push_back(username)
+		users.push_back(username);
 		currentUsers = currentUsers+1;
 		sendfifo.openwrite();
 		sendfifo.send("Connected");
@@ -64,7 +64,7 @@ void chatRoom::chatClear(){
      chatLog.clear();
 }
 
-void chatRoom::outputChat(Fifo& sendfifo){
+void chatRoom::outputChat(Fifo sendfifo){
    for (unsigned int i = 0; i < chatLog.size(); i++){
 		string outMessage = chatLog[i];
 		cout << outMessage << endl;

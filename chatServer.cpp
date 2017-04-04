@@ -9,7 +9,7 @@ string receive_fifo = "messageRequest";
 string send_fifo = "messageReply";
 
 int main() {
-  chatroom chat;
+  chatRoom chat;
   
 // create the FIFOs for communication
   Fifo recfifo(receive_fifo);
@@ -25,7 +25,7 @@ int main() {
 	
 	if (inMessage.find("USER") == 0){
 		string username = inMessage.substr(4);
-		chat.addUser(username);
+		chat.addUser(username, sendfifo);
 	}
 	
 	if (inMessage.find("SEND") == 0){
@@ -34,7 +34,7 @@ int main() {
 	}
 	
 	if (inMessage.find("REMOVE") == 0){
-		string username = inmessage.substr(6);
+		string username = inMessage.substr(6);
 		chat.removeUser(username);
 		if (chat.getCurrentUsers() == 0){
 			chat.chatClear();

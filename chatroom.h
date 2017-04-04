@@ -22,7 +22,7 @@ class chatRoom
 	 int getLimit();
 	 int getCurrentUsers();
 	 void addMessage (string message);
-	 void addUser(string userName);
+	 void addUser(string username, Fifo sendfifo);
 	 void removeUser(string userName);
 	 void outputChat(Fifo sendfifo);
 	 void chatClear(); //clear the chatLog
