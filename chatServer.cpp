@@ -1,5 +1,6 @@
 #include <vector>
 #include "fifo.h"
+#include "chatroom.h"
 
 using namespace std;
 
@@ -41,6 +42,7 @@ int main() {
 	
 	if (inMessage.find("SEND") == 0){
 		string message = inMessage.substr(4);
+		chat.addMessageToChat(message);
 	}
 	
 	if (inMessage.find("REMOVE") == 0){
@@ -54,6 +56,7 @@ int main() {
 	}
 	
 	if (inMessage.find("GET") == 0){
+		chat.displayChat(sendfifo);
 	//After all the messages have been sent, send out the $END signal
 		string outMessage = "$END";
 		sendfifo.openwrite();
@@ -64,4 +67,3 @@ int main() {
   
   return 0;
 }
-

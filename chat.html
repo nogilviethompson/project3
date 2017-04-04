@@ -6,6 +6,7 @@
 </head>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
 
+<script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 <script type = "text/javascript" src="chat.js">
 </script>
 
@@ -16,7 +17,7 @@
 
 <form name="usernameForm">
 <h2>Please enter a username:</h2> 
-<input name="unameInput" type="text" onKeydown= "enterName();" id=uname maxlength=30></td>
+<input name="unameInput" type="text" class="username" id=uname maxlength=30></td>
 <p>
   <input type="button" id=unameButton onclick="checkName()" name="Check" value="Submit" />
 </p>
@@ -29,7 +30,7 @@
 <hr>
 <form name="chatForm">
 <h2> Type a message:  </h2>
-<p><input name="textInput" type="text" onKeydown= "Javascript: if (event.keyCode==13) sendMessage();" id=message maxlength=140 disabled></td></p>
+<p><input name="textInput" class="messagearea" type="text" id=message maxlength=140 disabled></td></p>
 
 <p>
 <div id="buttons">

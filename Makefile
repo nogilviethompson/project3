@@ -2,7 +2,7 @@
 # For CSC3004 Software Development
 
 # Put your user name below:
-USER= grigullb
+USER= ogilviethompsonh
 
 CC= g++
 
@@ -19,7 +19,7 @@ all: chatServer chatTest chatAjax PutCGI PutHTML
 chatTest.o: chatTest.cpp fifo.h
 	$(CC) -c $(CFLAGS) chatTest.cpp
 
-chatServer.o: chatServer.cpp fifo.h
+chatServer.o: chatServer.cpp fifo.h chatroom.h
 	$(CC) -c $(CFLAGS) chatServer.cpp
 
 chatAjax.o: chatAjax.cpp fifo.h
@@ -28,9 +28,12 @@ chatAjax.o: chatAjax.cpp fifo.h
 chatTest: chatTest.o fifo.o
 	$(CC) chatTest.o fifo.o -o chatTest
 
-chatServer: chatServer.o fifo.o
-	$(CC) chatServer.o  fifo.o -o chatServer
+chatServer: chatServer.o fifo.o chatroom.o
+	$(CC) chatServer.o  fifo.o chatroom.o -o chatServer
 
+chatroom.o: chatroom.cpp chatroom.h
+		g++ -c chatroom.cpp
+	
 fifo.o:		fifo.cpp fifo.h
 		g++ -c fifo.cpp
 

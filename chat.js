@@ -13,7 +13,7 @@ function init() {
 function user(){
 	var com = 'USER';
 	var uname = document.getElementById('uname').value;
-	XMLHttp.open("GET", "/cgi-bin/grigullb_chatAjax.cgi?"
+	XMLHttp.open("GET", "/cgi-bin/ogilviethompsonh_chatAjax.cgi?"
 						 + "&command=" + com
 						 + "&username=" + uname
 						 ,true);
@@ -42,7 +42,7 @@ function sendMessage(){
 	
 	sendBusy = true;
 	
-	XMLHttp.open("GET", "/cgi-bin/grigullb_chatAjax.cgi?"
+	XMLHttp.open("GET", "/cgi-bin/ogilviethompsonh_chatAjax.cgi?"
 						 + "&command=" + com
 						 + "&username=" + uname
 						 + "&message=" + message
@@ -53,7 +53,7 @@ function sendMessage(){
 
 function getResponse(){
 	var com = 'GET';
-	XMLHttp.open("GET", "/cgi-bin/grigullb_chatAjax.cgi?"
+	XMLHttp.open("GET", "/cgi-bin/ogilviethompsonh_chatAjax.cgi?"
 						 + "&command=" + com
 						 ,true);
 	
@@ -97,3 +97,21 @@ function checkName() {
 	autoRefresh();
 	user();
 }
+
+$(document).ready(function() {
+    $('.username').keydown(function(event) {
+        if (event.keyCode == 13) {
+            checkName();
+            return false;
+         }
+    });
+});
+
+$(document).ready(function() {
+    $('.messagearea').keydown(function(event) {
+        if (event.keyCode == 13) {
+            sendMessage();
+            return false;
+         }
+    });
+});
