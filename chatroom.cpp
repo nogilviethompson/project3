@@ -7,6 +7,7 @@ using namespace std;
 chatRoom::chatRoom(){
 	roomName="";
 	userLimit=2;
+	currentUsers=0;
 }
 
 void chatRoom::setName(string name){
@@ -48,16 +49,19 @@ void chatRoom::addUser(string username, Fifo sendfifo){
 		sendfifo.send("Connected");
 		sendfifo.fifoclose();
 	}
-	
 }
 
 void chatRoom::removeUser(string username){
 	for (unsigned int i = 0; i < users.size(); i++){
 		if (users[i] == username){
-			users.erase (users.begin()+i);
+			users.erase(users.begin()+i);
 		}
 	}
 	currentUsers = currentUsers-1;
+	if (currentUsers < 0){
+		currentUsers = 0;
+	}
+	
 }
 
 void chatRoom::chatClear(){

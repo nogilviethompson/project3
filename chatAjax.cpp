@@ -112,4 +112,7 @@ void user (Fifo sendfifo, Fifo recfifo, Cgicc cgi){
 	if (reply == "Connected"){
 		cout << "You are connected";
 	}
+	if (reply == "Matched"){
+		cout << "Sorry, but that username has already been taken";
+	}
 }

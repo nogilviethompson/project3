@@ -27,6 +27,11 @@ function user(){
 				clearInterval(intVar);
 				document.getElementById('hangUpButton').disabled = true;
 			}
+			if (response === "Sorry, but that username has already been taken"){
+				document.getElementById('message').disabled = true;
+				clearInterval(intVar);
+				document.getElementById('hangUpButton').disabled = true;
+			}
 		}
 	}
 	XMLHttp.send(null);

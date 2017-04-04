@@ -15,6 +15,7 @@ int main() {
   Fifo recfifo(receive_fifo);
   Fifo sendfifo(send_fifo); 
   int userNum = 0;
+  vector<string> nameList;
   
   while (1) {
 
@@ -25,6 +26,21 @@ int main() {
 	
 	if (inMessage.find("USER") == 0){
 		string username = inMessage.substr(4);
+		bool match = false;
+		if (nameList.size() == 0){
+			nameList.push_back(username);
+		}
+		else{
+			for (unsigned int i = 0; i < nameList.size(); i++){
+				if (nameList[i] == username){
+					match = true;
+					sendfifo.openwrite();
+					sendfifo.send("Matched");
+					sendfifo.fifoclose();
+					break;
+				}
+			}
+		}
 		chat.addUser(username, sendfifo);
 	}
 	
