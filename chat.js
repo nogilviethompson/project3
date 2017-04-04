@@ -17,6 +17,7 @@ function user(){
 						 + "&command=" + com
 						 + "&username=" + uname
 						 ,true);
+						 
 	XMLHttp.onreadystatechange=function(){
 		if(XMLHttp.readyState == 4){
 			var response = XMLHttp.responseText
@@ -24,8 +25,8 @@ function user(){
 			if (response === "Sorry, but the chatroom is full"){
 				document.getElementById('message').disabled = true;
 				clearInterval(intVar);
+				document.getElementById('hangUpButton').disabled = true;
 			}
-		    console.log("Chat room full message:"+XMLHttp.responseText);
 		}
 	}
 	XMLHttp.send(null);
@@ -77,11 +78,10 @@ function removeUser(){
 	document.getElementById('unameButton').style.visibility = "visible";
 	document.getElementById('uname').disabled = false;
 	document.getElementById('message').disabled = true;
+	document.getElementById('hangUpButton').disabled = true;
 	var com = 'REMOVE';
-	var uname = document.getElementById('uname').value;
 	XMLHttp.open("GET", "/cgi-bin/ogilviethompsonh_chatAjax.cgi?"
 						 + "&command=" + com
-						 + "&username=" + uname
 						 ,true);
 	document.usernameForm.unameInput.value = "";
 	XMLHttp.send(null);
@@ -91,16 +91,9 @@ function checkName() {
     var uname = document.getElementById('uname').value;
 	document.getElementById('uname').disabled = true;
 	document.getElementById('message').disabled = false;
+	document.getElementById('hangUpButton').disabled = false;
 	document.getElementById('unameButton').style.visibility = "hidden";
 	document.getElementById('username_show').innerHTML = "Your username is "+uname;
 	autoRefresh();
 	user();
-}
-
-function kill(){
-	var com = 'KILL';
-	XMLHttp.open("GET", "/cgi-bin/ogilviethompsonh_chatAjax.cgi?"
-						 + "&command=" + com
-						 ,true);
-	XMLHttp.send(null);
 }

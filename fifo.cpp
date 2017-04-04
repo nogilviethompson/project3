@@ -144,4 +144,3 @@ void Fifo::send(string message) {
     }
   return;
 }
-

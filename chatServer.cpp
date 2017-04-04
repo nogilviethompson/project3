@@ -1,14 +1,4 @@
-#include <sys/types.h>
-#include <sys/wait.h>
-#include <unistd.h>
-#include <fcntl.h>
-#include <stdlib.h>
-#include <sys/stat.h>
 #include <vector>
-#include <iostream>
-#include <fstream>
-#include <vector>
-#include <algorithm>
 #include "fifo.h"
 
 using namespace std;
@@ -44,6 +34,7 @@ void Kill(int& userNum, chatRoom& room);
 /* Fifo names */
 string receive_fifo = "messageRequest";
 string send_fifo = "messageReply";
+
 
   
   int main() {
@@ -108,20 +99,18 @@ string send_fifo = "messageReply";
 
 
 
+
 void User(int& userNum, string& userMessage, Fifo& sendfifo,chatRoom& room)
 {
  		userNum = userNum+1;
 		cout << "Current Users: " << userNum << endl;
 		if(userNum <= room.getLimit()){
 			userMessage = "Connected";
-			cout << userMessage << endl;
 			sendfifo.openwrite();
 			sendfifo.send(userMessage);
 			sendfifo.fifoclose();
 		} else{
-			cout << "Current Users: " << userNum << endl;
 			userMessage = "Full";
-			cout << userMessage << endl;
 			sendfifo.openwrite();
 			sendfifo.send(userMessage);
 			sendfifo.fifoclose();
@@ -155,10 +144,11 @@ void Get(chatRoom& room, Fifo& sendfifo)
 		sendfifo.fifoclose();
 	}*/
 	
+
 	room.outputChat(sendfifo);
+
 	//After all the messages have been sent, send out the $END signal
 		string outMessage = "$END";
-		cout << outMessage << endl;
 		sendfifo.openwrite();
 		sendfifo.send(outMessage);
 		sendfifo.fifoclose();
@@ -171,6 +161,7 @@ void Kill(int& userNum, chatRoom& room)
 	if (userNum == 0){
 		room.chatClear();
 	}
+
 }
  
  
@@ -180,7 +171,6 @@ chatRoom::chatRoom()
 {
 	roomName="";
 	userLimit=2;
-	chatLog={};
 }
 
 void chatRoom::setName(string name)
@@ -228,3 +218,4 @@ void chatRoom::outputChat(Fifo& sendfifo)
 		sendfifo.fifoclose();
 	}
 }
+

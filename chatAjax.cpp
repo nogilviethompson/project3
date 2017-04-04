@@ -33,7 +33,7 @@ int main() {
   // Create AJAX objects to recieve information from web page.
   form_iterator command = cgi.getElement("command");
   string stCommand = **command;
-  
+  cout << "Content-Type: text/plain\n\n";  
   if (stCommand == "SEND")
   {
 	  form_iterator uname = cgi.getElement("username");
@@ -43,17 +43,15 @@ int main() {
 	  string full = stCommand+stUname+": "+stMessage;
 	  sendfifo.openwrite();
 	  sendfifo.send(full);
-	  cout << "Content-Type: text/plain\n\n";
   }
   
   if (stCommand == "GET"){
 	sendfifo.openwrite();
 	sendfifo.send(stCommand);
-	cout << "Content-Type: text/plain\n\n";
 	recfifo.openread();
 	reply = recfifo.recv();
 	while(reply.find("$END") == -1){
-		reply = reply + "<p>";
+		reply = "<p>" + reply + "</p>";
 		cout<< reply;
 		reply = recfifo.recv();
 		if (reply.find("$END") != -1){
@@ -68,14 +66,14 @@ int main() {
 	  string stUname = **uname;
 	  string full = stCommand+stUname;
 	  sendfifo.send(full);
-	  cout << "Content-Type: text/plain\n\n";
   }
   
   if (stCommand == "USER"){
-	string send = "USER";
+    form_iterator uname = cgi.getElement("username");
+    string stUname = **uname;
+	string send = "USER "+stUname;
 	sendfifo.openwrite();
 	sendfifo.send(send);
-	cout << "Content-Type: text/plain\n\n";
 	recfifo.openread();
 	reply = recfifo.recv();
 	if (reply == "Full"){
@@ -85,13 +83,7 @@ int main() {
 		cout << "You are connected";
 	}
   }
-  
-   if (stCommand == "KILL"){
-      sendfifo.openwrite();
-      sendfifo.send(stCommand);
-	  cout << "Content-Type: text/plain\n\n";
-  }
-  
+   
 	sendfifo.fifoclose();
 	recfifo.fifoclose();
   
