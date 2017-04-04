@@ -9,8 +9,6 @@ string receive_fifo = "messageRequest";
 string send_fifo = "messageReply";
 
 int main() {
-  
-  string userMessage;
   chatroom chat;
   
 // create the FIFOs for communication
@@ -26,37 +24,25 @@ int main() {
 	recfifo.fifoclose();
 	
 	if (inMessage.find("USER") == 0){
-		userNum = userNum+1;
-		if(userNum <= 2){
-			userMessage = "Connected";
-			sendfifo.openwrite();
-			sendfifo.send(userMessage);
-			sendfifo.fifoclose();
-		} else{
-			userMessage = "Full";
-			sendfifo.openwrite();
-			sendfifo.send(userMessage);
-			sendfifo.fifoclose();
-		}
+		string username = inMessage.substr(4);
+		chat.addUser(username);
 	}
 	
 	if (inMessage.find("SEND") == 0){
 		string message = inMessage.substr(4);
-		chat.addMessageToChat(message);
+		chat.addMessage(message);
 	}
 	
 	if (inMessage.find("REMOVE") == 0){
-		userNum = userNum-1;
-		if (userNum < 0){
-			userNum = 0;
-		}
-		if (userNum == 0){
-			chat.clearChat();
+		string username = inmessage.substr(6);
+		chat.removeUser(username);
+		if (chat.getCurrentUsers() == 0){
+			chat.chatClear();
 		}
 	}
 	
 	if (inMessage.find("GET") == 0){
-		chat.displayChat(sendfifo);
+		chat.outputChat(sendfifo);
 	//After all the messages have been sent, send out the $END signal
 		string outMessage = "$END";
 		sendfifo.openwrite();
