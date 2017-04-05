@@ -3,7 +3,7 @@
 
 # Put your user name below:
 
-USER= grigullb
+USER= ogilviethompsonh
 
 CC= g++
 

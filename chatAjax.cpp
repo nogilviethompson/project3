@@ -57,7 +57,7 @@ int main() {
 	join(sendfifo, recfifo, cgi, stCommand);
   }
   
-  if (stCommand == "GET"){
+  if (stCommand == "GETCHATS"){
 	get(sendfifo, recfifo, stCommand);
   }
   
@@ -119,7 +119,9 @@ void user (Fifo sendfifo, Fifo recfifo, Cgicc cgi){
 	if (reply == "Matched"){
 		cout << "Sorry, but that username has already been taken";
 	}
-	
+	else{
+		cout << "Good";
+	}
 }
 
 void newChat(Fifo sendfifo, Cgicc cgi, string stCommand){

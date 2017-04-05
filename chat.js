@@ -8,12 +8,15 @@ function init() {
     } else {
 	XMLHttp = new XMLHttpRequest();
     }
+	
+	document.getElementById('chatForm').style.visibility = "hidden";
+	document.getElementById('messageForm').style.visibility = "hidden";
 }
 
 function user(){
-	var com = 'USER';
+	var com = 'CHECK';
 	var uname = document.getElementById('uname').value;
-	XMLHttp.open("GET", "/cgi-bin/grigullb_chatAjax.cgi?"
+	XMLHttp.open("GET", "/cgi-bin/ogilviethompsonh_chatAjax.cgi?"
 						 + "&command=" + com
 						 + "&username=" + uname
 						 ,true);
@@ -21,13 +24,8 @@ function user(){
 	XMLHttp.onreadystatechange=function(){
 		if(XMLHttp.readyState == 4){
 			var response = XMLHttp.responseText
-			document.getElementById('connect').innerHTML = response;
-			if (response === "Sorry, but the chatroom is full"){
-				document.getElementById('message').disabled = true;
-				clearInterval(intVar);
-				document.getElementById('hangUpButton').disabled = true;
-			}
 			if (response === "Sorry, but that username has already been taken"){
+				document.getElementById('connect').innerHTML = response;
 				document.getElementById('message').disabled = true;
 				clearInterval(intVar);
 				document.getElementById('hangUpButton').disabled = true;
@@ -41,13 +39,18 @@ function sendMessage(){
 	var uname = document.getElementById('uname').value;
 	var message = document.getElementById('message').value;
 	var com = 'SEND';
+	
 	if (sendBusy){
+		return;
+	}
+	
+	if (message === ""){
 		return;
 	}
 	
 	sendBusy = true;
 	
-	XMLHttp.open("GET", "/cgi-bin/grigullb_chatAjax.cgi?"
+	XMLHttp.open("GET", "/cgi-bin/ogilviethompsonh_chatAjax.cgi?"
 						 + "&command=" + com
 						 + "&username=" + uname
 						 + "&message=" + message
@@ -57,18 +60,21 @@ function sendMessage(){
 }
 
 function getResponse(){
-	var com = 'GET';
-	XMLHttp.open("GET", "/cgi-bin/grigullb_chatAjax.cgi?"
+	var com = 'GETCHATS';
+	XMLHttp.open("GET", "/cgi-bin/ogilviethompsonh_chatAjax.cgi?"
 						 + "&command=" + com
 						 ,true);
 	
 	XMLHttp.onreadystatechange=function() {
 		if(XMLHttp.readyState == 4){
 			var responseMessage = XMLHttp.responseText;
-			var chatSection = responseMessage.indexOf("Chat");
-			var messageLength = responseMessage.length;
-			document.getElementById('response_area').innerHTML = responseMessage.substring(0,chatSection);
-			document.getElementById('chatLog_area').innerHTML = "<div class=chatListItem id="+responseMessage.substring(chatSection, chatSection+5)+">"+responseMessage.substring(chatSection, messageLength)+"</div>";
+			var messageArray = responseMessage.split('~chatname~');
+			console.log(messageArray.length);
+			$('#chatLog_area').empty();
+			for(var i = 0;i<messageArray.length; i++){
+				document.getElementById('response_area').innerHTML = messageArray[0];
+				$('#chatLog_area').append("<div class=chatListItem>"+messageArray[i]+"</div>");
+			}
 			sendBusy = false;
 		    console.log("Get Message response:"+XMLHttp.responseText);
 		}
@@ -88,8 +94,10 @@ function removeUser(){
 	document.getElementById('uname').disabled = false;
 	document.getElementById('message').disabled = true;
 	document.getElementById('hangUpButton').disabled = true;
+	document.getElementById('newChatButton').disabled = true;
+	document.getElementById('chatForm').style.visibility = "hidden";
 	var com = 'REMOVE';
-	XMLHttp.open("GET", "/cgi-bin/grigullb_chatAjax.cgi?"
+	XMLHttp.open("GET", "/cgi-bin/ogilviethompsonh_chatAjax.cgi?"
 						 + "&command=" + com
 						 ,true);
 	document.usernameForm.unameInput.value = "";
@@ -101,10 +109,18 @@ function checkName() {
 	document.getElementById('uname').disabled = true;
 	document.getElementById('message').disabled = false;
 	document.getElementById('hangUpButton').disabled = false;
+	document.getElementById('newChatButton').disabled = false;
 	document.getElementById('unameButton').style.visibility = "hidden";
+	document.getElementById('chatLog_area').style.visibility = "visible";
 	document.getElementById('username_show').innerHTML = "Your username is "+uname;
 	autoRefresh();
 	user();
+}
+
+function newChat(){
+	document.getElementById('newChatButton').disabled = true;
+	document.getElementById('chatForm').style.visibility = "visible";
+	document.getElementById('chatLog_area').style.visibility = "hidden";
 }
 
 $(document).ready(function() {
@@ -114,12 +130,20 @@ $(document).ready(function() {
             return false;
          }
     });
-    $(document).on("click", ".chatListItem",function(event){
+	
+    $('.messagearea').keydown(function(event) {
+        if (event.keyCode == 13) {
+            sendMessage();
+            return false;
+         }
+    });
+    
+	$(document).on("click", ".chatListItem",function(event){
     var com = 'JOINCHAT';
     var uname = document.getElementById('uname').value;
     var chatName = $(this).html();
     console.log(chatName);
-	XMLHttp.open("GET", "/cgi-bin/grigullb_chatAjax.cgi?"
+	XMLHttp.open("GET", "/cgi-bin/ogilviethompsonh_chatAjax.cgi?"
 						 + "&command=" + com
 						 + "&username=" + uname
 						 + "&chatName=" + chatName
@@ -138,14 +162,4 @@ $(document).ready(function() {
 	}
 		
     });
-});
-
-$(document).ready(function() {
-    $('.messagearea').keydown(function(event) {
-        if (event.keyCode == 13) {
-            sendMessage();
-            return false;
-         }
-    });
-    $
 });

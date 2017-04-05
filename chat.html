@@ -28,22 +28,35 @@
 </form>
 
 <hr>
-<form name="chatForm">
-<h2> Type a message:  </h2>
-<p><input name="textInput" class="messagearea" type="text" id=message maxlength=140 disabled></td></p>
+
+<p>Pick a chatroom or press the button to create your own</p>
+<input type="button" onclick="newChat()" id=newChatButton name="New Chat" value = "New Chat" disabled />
+
+<form name="newChatForm" id=chatForm>
+<h2>Please enter a name for your chatroom:</h2> 
+<input name="chatNameInput" type="text" class="chatName" id=chatName maxlength=30></td>
+<p>
+  <input type="button" id=chatNameButton onclick="createChat ()" name="Create" value="Submit" />
+</p>
+</form>
+
+
+<div id="chatLog_area">
+</div>
 
 <p>
 <div id="buttons">
-  <input type="button" onclick="sendMessage ()" name="Send" value="Send" />
+  <input type="button" onclick="sendMessage ()" name="Send" value="Send"/>
   <input type="button" onclick="removeUser ()" id=hangUpButton name="Hang Up" value="Hang Up" disabled />
 </div>
 </p>
-</form>
+
+<form name="messageForm" id=messageForm>
+<h2> Type a message:  </h2>
+<p><input name="textInput" class="messagearea" type="text" id=message maxlength=140 disabled></td></p>
 <div id = "response_area">
 </div>
-<div id="chatLog_area">
-</div>
-<div id = "hangUp">
-</div>
+</form>
+
 </body>
 </html>
