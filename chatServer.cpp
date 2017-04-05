@@ -1,15 +1,28 @@
 #include <vector>
 #include "fifo.h"
 #include "chatroom.h"
+#include <sstream>
+
 
 using namespace std;
 
 /* Fifo names */
 string receive_fifo = "messageRequest";
 string send_fifo = "messageReply";
+namespace patch
+{
+    template < typename T > std::string to_string( const T& n )
+    {
+        std::ostringstream stm ;
+        stm << n ;
+        return stm.str() ;
+    }
+}
 
 int main() {
   chatRoom chat;
+  vector<chatRoom> chatroomList;
+  chatroomList.push_back(chat);
   
 // create the FIFOs for communication
   Fifo recfifo(receive_fifo);
@@ -59,6 +72,15 @@ int main() {
 	
 	if (inMessage.find("GET") == 0){
 		chat.outputChat(sendfifo);
+		for (unsigned int i = 0; i < chatroomList.size(); i++){
+			string roomNum = patch::to_string(i+1);
+			string chatname = "Chat"+roomNum+": "+chatroomList[i].getName();
+			string outMessage = chatname;
+			cout << outMessage << endl;
+			sendfifo.openwrite();
+			sendfifo.send(outMessage);
+			sendfifo.fifoclose();
+		}
 	//After all the messages have been sent, send out the $END signal
 		string outMessage = "$END";
 		sendfifo.openwrite();

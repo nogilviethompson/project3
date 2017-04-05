@@ -5,9 +5,9 @@
 using namespace std;
 
 chatRoom::chatRoom(){
-	roomName="";
-	userLimit=2;
-	currentUsers=0;
+	roomName="my chat";
+	currentUsers = 0;
+	userLimit = 2;
 }
 
 void chatRoom::setName(string name){

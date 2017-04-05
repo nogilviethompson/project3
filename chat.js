@@ -13,7 +13,7 @@ function init() {
 function user(){
 	var com = 'USER';
 	var uname = document.getElementById('uname').value;
-	XMLHttp.open("GET", "/cgi-bin/ogilviethompsonh_chatAjax.cgi?"
+	XMLHttp.open("GET", "/cgi-bin/grigullb_chatAjax.cgi?"
 						 + "&command=" + com
 						 + "&username=" + uname
 						 ,true);
@@ -47,7 +47,7 @@ function sendMessage(){
 	
 	sendBusy = true;
 	
-	XMLHttp.open("GET", "/cgi-bin/ogilviethompsonh_chatAjax.cgi?"
+	XMLHttp.open("GET", "/cgi-bin/grigullb_chatAjax.cgi?"
 						 + "&command=" + com
 						 + "&username=" + uname
 						 + "&message=" + message
@@ -58,13 +58,17 @@ function sendMessage(){
 
 function getResponse(){
 	var com = 'GET';
-	XMLHttp.open("GET", "/cgi-bin/ogilviethompsonh_chatAjax.cgi?"
+	XMLHttp.open("GET", "/cgi-bin/grigullb_chatAjax.cgi?"
 						 + "&command=" + com
 						 ,true);
 	
 	XMLHttp.onreadystatechange=function() {
 		if(XMLHttp.readyState == 4){
-			document.getElementById('response_area').innerHTML = XMLHttp.responseText;
+			var responseMessage = XMLHttp.responseText;
+			var chatSection = responseMessage.indexOf("Chat");
+			var messageLength = responseMessage.length;
+			document.getElementById('response_area').innerHTML = responseMessage.substring(0,chatSection);
+			document.getElementById('chatLog_area').innerHTML = responseMessage.substring(chatSection, messageLength);
 			sendBusy = false;
 		    console.log("Get Message response:"+XMLHttp.responseText);
 		}
@@ -85,7 +89,7 @@ function removeUser(){
 	document.getElementById('message').disabled = true;
 	document.getElementById('hangUpButton').disabled = true;
 	var com = 'REMOVE';
-	XMLHttp.open("GET", "/cgi-bin/ogilviethompsonh_chatAjax.cgi?"
+	XMLHttp.open("GET", "/cgi-bin/grigullb_chatAjax.cgi?"
 						 + "&command=" + com
 						 ,true);
 	document.usernameForm.unameInput.value = "";

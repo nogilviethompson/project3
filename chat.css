@@ -63,3 +63,8 @@ overflow: scroll;
     outline-color: black;
     margin: 30px 10px 0px 220px;
 }
+#chatLog_area{
+	background-color: white;
+	width:150;
+	height:200;
+}
