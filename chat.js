@@ -68,7 +68,7 @@ function getResponse(){
 			var chatSection = responseMessage.indexOf("Chat");
 			var messageLength = responseMessage.length;
 			document.getElementById('response_area').innerHTML = responseMessage.substring(0,chatSection);
-			document.getElementById('chatLog_area').innerHTML = responseMessage.substring(chatSection, messageLength);
+			document.getElementById('chatLog_area').innerHTML = "<div class=chatListItem id="+responseMessage.substring(chatSection, chatSection+5)+">"+responseMessage.substring(chatSection, messageLength)+"</div>";
 			sendBusy = false;
 		    console.log("Get Message response:"+XMLHttp.responseText);
 		}
@@ -114,6 +114,30 @@ $(document).ready(function() {
             return false;
          }
     });
+    $(document).on("click", ".chatListItem",function(event){
+    var com = 'JOINCHAT';
+    var uname = document.getElementById('uname').value;
+    var chatName = $(this).html();
+    console.log(chatName);
+	XMLHttp.open("GET", "/cgi-bin/grigullb_chatAjax.cgi?"
+						 + "&command=" + com
+						 + "&username=" + uname
+						 + "&chatName=" + chatName
+						 ,true);
+	
+	XMLHttp.onreadystatechange=function() {
+    	if(XMLHttp.readyState == 4){
+			var response = XMLHttp.responseText
+			document.getElementById('connect').innerHTML = response;
+			if (response === "Sorry, but the chatroom is full"){
+				document.getElementById('message').disabled = true;
+				clearInterval(intVar);
+				document.getElementById('hangUpButton').disabled = true;
+			}
+		}
+	}
+		
+    });
 });
 
 $(document).ready(function() {
@@ -123,4 +147,5 @@ $(document).ready(function() {
             return false;
          }
     });
+    $
 });

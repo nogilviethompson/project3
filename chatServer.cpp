@@ -62,6 +62,7 @@ int main() {
 		string message = inMessage.substr(4);
 		chat.addMessage(message);
 	}
+	
 	if (inMessage.find("CHECK") == 0){
 		string username = inMessage.substr(4);
 		bool match = false;
