@@ -22,8 +22,11 @@ namespace patch
 
 int main() {
   chatRoom chat;
+  chatRoom chat1;
+  chat1.setName("your room");
   vector<chatRoom> chatList;
   chatList.push_back(chat);
+  chatList.push_back(chat1);
   
 // create the FIFOs for communication
   Fifo recfifo(receive_fifo);
@@ -115,7 +118,7 @@ int main() {
 		chat.outputChat(sendfifo);
 		for (unsigned int i = 0; i < chatList.size(); i++){
 			string roomNum = patch::to_string(i+1);
-			string chatname = "Chat"+roomNum+": "+chatList[i].getName();
+			string chatname = "~chatname~"+chatList[i].getName();
 			string outMessage = chatname;
 			cout << outMessage << endl;
 			sendfifo.openwrite();

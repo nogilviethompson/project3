@@ -65,10 +65,13 @@ function getResponse(){
 	XMLHttp.onreadystatechange=function() {
 		if(XMLHttp.readyState == 4){
 			var responseMessage = XMLHttp.responseText;
-			var chatSection = responseMessage.indexOf("Chat");
-			var messageLength = responseMessage.length;
-			document.getElementById('response_area').innerHTML = responseMessage.substring(0,chatSection);
-			document.getElementById('chatLog_area').innerHTML = "<div class=chatListItem id="+responseMessage.substring(chatSection, chatSection+5)+">"+responseMessage.substring(chatSection, messageLength)+"</div>";
+			var messageArray = responseMessage.split('~chatname~');
+			console.log(messageArray.length);
+			$('#chatLog_area').empty();
+			for(var i = 0;i<messageArray.length; i++){
+				document.getElementById('response_area').innerHTML = messageArray[0];
+				$('#chatLog_area').append("<div class=chatListItem>"+messageArray[i]+"</div>");
+			}
 			sendBusy = false;
 		    console.log("Get Message response:"+XMLHttp.responseText);
 		}
