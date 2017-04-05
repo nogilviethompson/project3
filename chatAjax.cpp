@@ -30,6 +30,8 @@ void get (Fifo sendfifo, Fifo recfifo, string stCommand);
 //Postcondition: The entire chatlog has been cout-ed
 void remove (Fifo sendfifo, Cgicc cgi, string stCommand);
 void user (Fifo sendfifo, Fifo recfifo, Cgicc cgi);
+void join(Fifo sendfifo, Fifo recfifo, Cgicc cgi, string stCommand);
+void newChat(Fifo sendfifo, Cgicc cgi, string stCommand);
 
 int main() {
   Cgicc cgi;    // Ajax object
@@ -47,6 +49,14 @@ int main() {
 	  send(sendfifo, cgi, stCommand);
   }
   
+  if (stCommand == "NEWCHAT"){
+	newChat(sendfifo, cgi, stCommand);
+  }  
+  
+  if (stCommand == "JOINCHAT"){
+	join(sendfifo, recfifo, cgi, stCommand);
+  }
+  
   if (stCommand == "GET"){
 	get(sendfifo, recfifo, stCommand);
   }
@@ -55,7 +65,7 @@ int main() {
       remove(sendfifo, cgi, stCommand);
   }
   
-  if (stCommand == "USER"){
+  if (stCommand == "CHECK"){
    user(sendfifo, recfifo, cgi);
   }
    
@@ -106,13 +116,36 @@ void user (Fifo sendfifo, Fifo recfifo, Cgicc cgi){
 	sendfifo.send(send);
 	recfifo.openread();
 	string reply = recfifo.recv();
-	if (reply == "Full"){
-		cout << "Sorry, but the chatroom is full";
+	if (reply == "Matched"){
+		cout << "Sorry, but that username has already been taken";
 	}
+	
+}
+
+void newChat(Fifo sendfifo, Cgicc cgi, string stCommand){
+	form_iterator chatName = cgi.getElement("chatNameInput");
+	string stChatName = **chatName;
+	string send = stCommand+stChatName;
+	sendfifo.openwrite();
+	sendfifo.send(send);
+}
+
+void join(Fifo sendfifo, Fifo recfifo, Cgicc cgi, string stCommand){
+	form_iterator uname = cgi.getElement("username");
+	form_iterator chatName = cgi.getElement("chatName");
+	string stUname = **uname;
+	unsigned int unameSize = stUname.size();
+	char length = unameSize;
+	string stChatName = **chatName;
+	string send = stCommand+length+stUname+stChatName;
+	sendfifo.openwrite();
+	sendfifo.send(send);
+	recfifo.openread();
+	string reply = recfifo.recv();
 	if (reply == "Connected"){
 		cout << "You are connected";
 	}
-	if (reply == "Matched"){
-		cout << "Sorry, but that username has already been taken";
+	if (reply == "Full"){
+		cout << "Sorry, but the chatroom is full";
 	}
 }

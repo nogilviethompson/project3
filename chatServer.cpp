@@ -9,6 +9,7 @@ using namespace std;
 /* Fifo names */
 string receive_fifo = "messageRequest";
 string send_fifo = "messageReply";
+/* Found on stack overflow. Tried to use to_string function in std namespace but it didn't work*/
 namespace patch
 {
     template < typename T > std::string to_string( const T& n )
@@ -21,8 +22,8 @@ namespace patch
 
 int main() {
   chatRoom chat;
-  vector<chatRoom> chatroomList;
-  chatroomList.push_back(chat);
+  vector<chatRoom> chatList;
+  chatList.push_back(chat);
   
 // create the FIFOs for communication
   Fifo recfifo(receive_fifo);
@@ -61,6 +62,45 @@ int main() {
 		string message = inMessage.substr(4);
 		chat.addMessage(message);
 	}
+	if (inMessage.find("CHECK") == 0){
+		string username = inMessage.substr(4);
+		bool match = false;
+		if (nameList.size() == 0){
+			nameList.push_back(username);
+		}
+		else{
+			for (unsigned int i = 0; i < nameList.size(); i++){
+				if (nameList[i] == username){
+					match = true;
+					sendfifo.openwrite();
+					sendfifo.send("Matched");
+					sendfifo.fifoclose();
+					break;
+				}
+			}
+		}
+	}
+	
+	if (inMessage.find("NEWCHAT") == 0){
+		string name = inMessage.substr(7);
+		chatRoom chat;
+		chat.setName(name);
+		chatList.push_back(chat);
+	}
+	
+	if (inMessage.find("JOINCHAT") == 0){
+		string unsorted = inMessage.substr(8);
+		char point = unsorted.at(0);
+		unsigned int length = point;
+		unsorted = unsorted.substr(1);
+		string username = unsorted.substr(0, length);
+		string chatName = unsorted.substr(length);
+		for (unsigned int i = 0; i < chatList.size(); i++){
+			if (chatName == chatList[i].getName()){
+				chatList[i].addUser(username, sendfifo);
+			}
+		}
+	}
 	
 	if (inMessage.find("REMOVE") == 0){
 		string username = inMessage.substr(6);
@@ -72,9 +112,9 @@ int main() {
 	
 	if (inMessage.find("GET") == 0){
 		chat.outputChat(sendfifo);
-		for (unsigned int i = 0; i < chatroomList.size(); i++){
+		for (unsigned int i = 0; i < chatList.size(); i++){
 			string roomNum = patch::to_string(i+1);
-			string chatname = "Chat"+roomNum+": "+chatroomList[i].getName();
+			string chatname = "Chat"+roomNum+": "+chatList[i].getName();
 			string outMessage = chatname;
 			cout << outMessage << endl;
 			sendfifo.openwrite();
