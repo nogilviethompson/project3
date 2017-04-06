@@ -85,10 +85,22 @@ int main() {
 	}
 	
 	if (inMessage.find("NEWCHAT") == 0){
-		string name = inMessage.substr(7);
-		chatRoom chat;
-		chat.setName(name);
-		chatList.push_back(chat);
+		string unsorted = inMessage.substr(7);
+		char point = unsorted.at(0);
+		unsigned int length = point;
+		unsorted = unsorted.substr(1);
+		string username = unsorted.substr(0, length);
+		string chatName = unsorted.substr(length);
+		chatRoom newChat;
+		newChat.setName(chatName);
+		newChat.addUser(username,sendfifo);
+		chatList.push_back(newChat);
+		for (unsigned int i = 0; i < chatList.size(); i++){
+			
+			cout << chatList[i].getName() <<endl;
+			
+		}
+		
 	}
 	
 	if (inMessage.find("JOINCHAT") == 0){
@@ -106,6 +118,7 @@ int main() {
 		}
 	}
 	
+		
 	if (inMessage.find("REMOVE") == 0){
 		string username = inMessage.substr(6);
 		chat.removeUser(username);

@@ -32,7 +32,7 @@ void getMessages(string stCommand, Fifo sendfifo, Fifo recfifo, Cgicc cgi);
 void remove (Fifo sendfifo, Cgicc cgi, string stCommand);
 void user (Fifo sendfifo, Fifo recfifo, Cgicc cgi);
 void join(Fifo sendfifo, Fifo recfifo, Cgicc cgi, string stCommand);
-void newChat(Fifo sendfifo, Cgicc cgi, string stCommand);
+void createChat(Fifo sendfifo, Fifo recfifo, Cgicc cgi, string stCommand);
 
 int main() {
   Cgicc cgi;    // Ajax object
@@ -43,6 +43,8 @@ int main() {
   // Create AJAX objects to recieve information from web page.
   form_iterator command = cgi.getElement("command");
   string stCommand = **command;
+  cout << stCommand;
+  
   cout << "Content-Type: text/plain\n\n";  
   
   if (stCommand == "SEND")
@@ -51,7 +53,8 @@ int main() {
   }
   
   if (stCommand == "NEWCHAT"){
-	newChat(sendfifo, cgi, stCommand);
+	createChat(sendfifo, recfifo, cgi, stCommand);
+	cout << "New Chat";
   }  
   
   if (stCommand == "JOINCHAT"){
@@ -147,12 +150,22 @@ void user (Fifo sendfifo, Fifo recfifo, Cgicc cgi){
 	}
 }
 
-void newChat(Fifo sendfifo, Cgicc cgi, string stCommand){
-	form_iterator chatName = cgi.getElement("chatNameInput");
+void createChat(Fifo sendfifo,Fifo recfifo, Cgicc cgi, string stCommand){
+	form_iterator chatName = cgi.getElement("chatName");
+	form_iterator uname = cgi.getElement("username");
+	string stUname = **uname;
 	string stChatName = **chatName;
-	string send = stCommand+stChatName;
+	string send = stCommand+stUname+stChatName;
 	sendfifo.openwrite();
 	sendfifo.send(send);
+	recfifo.openread();
+	string reply = recfifo.recv();
+	if (reply == "Connected"){
+		cout << "You are connected";
+	}
+	if (reply == "Full"){
+		cout << "Sorry, but the chatroom is full";
+	}
 }
 
 void join(Fifo sendfifo, Fifo recfifo, Cgicc cgi, string stCommand){
