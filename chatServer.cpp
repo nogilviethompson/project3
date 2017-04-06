@@ -58,7 +58,6 @@ int main() {
 				}
 			}
 		}
-		chat.addUser(username, sendfifo);
 	}
 	
 	if (inMessage.find("SEND") == 0){
@@ -99,6 +98,7 @@ int main() {
 		unsorted = unsorted.substr(1);
 		string username = unsorted.substr(0, length);
 		string chatName = unsorted.substr(length);
+		cout << chatName << " - " << username << endl;
 		for (unsigned int i = 0; i < chatList.size(); i++){
 			if (chatName == chatList[i].getName()){
 				chatList[i].addUser(username, sendfifo);
@@ -126,10 +126,21 @@ int main() {
 		}
 	//After all the messages have been sent, send out the $END signal
 		string outMessage = "$END";
+		cout << outMessage << endl;
 		sendfifo.openwrite();
 		sendfifo.send(outMessage);
 		sendfifo.fifoclose();
 	}
+	
+	if (inMessage.find("GETMESSAGES")== 0){
+		string chatName = inMessage.substr(11);
+		for (unsigned int i = 0; i < chatList.size(); i++){
+			if (chatName == chatList[i].getName()){
+				chatList[i].outputChat(sendfifo);
+			}
+		}
+	}
+	
   }
   
   return 0;

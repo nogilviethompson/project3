@@ -1,6 +1,7 @@
 var XMLHttp;
 var intVar;
 var sendBusy = false;
+var chosenChat;
 
 function init() {
     if(navigator.appName == "Microsoft Internet Explorer") {
@@ -25,7 +26,7 @@ function user(){
 		if(XMLHttp.readyState == 4){
 			var response = XMLHttp.responseText
 			if (response === "Sorry, but that username has already been taken"){
-				document.getElementById('connect').innerHTML = response;
+				document.getElementById('userMatch').innerHTML = response;
 				document.getElementById('message').disabled = true;
 				clearInterval(intVar);
 				document.getElementById('hangUpButton').disabled = true;
@@ -72,7 +73,6 @@ function getResponse(){
 			console.log(messageArray.length);
 			$('#chatLog_area').empty();
 			for(var i = 0;i<messageArray.length; i++){
-				document.getElementById('response_area').innerHTML = messageArray[0];
 				$('#chatLog_area').append("<div class=chatListItem>"+messageArray[i]+"</div>");
 			}
 			sendBusy = false;
@@ -82,7 +82,26 @@ function getResponse(){
 	XMLHttp.send(null);
 }
 
-function autoRefresh(){
+function getMessages(){
+	var com = 'GETMESSAGES';
+	
+	XMLHttp.open("GET", "/cgi-bin/ogilviethompsonh_chatAjax.cgi?"
+						 + "&command=" + com
+						 + "&chatName=" + chosenChat
+						 ,true);
+	
+	XMLHttp.onreadystatechange=function() {
+		if(XMLHttp.readyState == 4){
+			var response = XMLHttp.responseText;
+			document.getElementById('response_area').innerHTML = response;
+			sendBusy = false;
+			}
+		}
+	}
+	XMLHttp.send(null);
+}
+
+function refreshChats(){
     intVar = setInterval(function(){ getResponse()}, 2000);
 }
 
@@ -96,7 +115,9 @@ function removeUser(){
 	document.getElementById('hangUpButton').disabled = true;
 	document.getElementById('newChatButton').disabled = true;
 	document.getElementById('chatForm').style.visibility = "hidden";
+	document.getElementById('messageForm').style.visibility = "hidden";
 	var com = 'REMOVE';
+	sendBusy = true;
 	XMLHttp.open("GET", "/cgi-bin/ogilviethompsonh_chatAjax.cgi?"
 						 + "&command=" + com
 						 ,true);
@@ -113,7 +134,7 @@ function checkName() {
 	document.getElementById('unameButton').style.visibility = "hidden";
 	document.getElementById('chatLog_area').style.visibility = "visible";
 	document.getElementById('username_show').innerHTML = "Your username is "+uname;
-	autoRefresh();
+	refreshChats();
 	user();
 }
 
@@ -124,7 +145,8 @@ function newChat(){
 }
 
 $(document).ready(function() {
-    $('.username').keydown(function(event) {
+    
+	$('.username').keydown(function(event) {
         if (event.keyCode == 13) {
             checkName();
             return false;
@@ -139,27 +161,36 @@ $(document).ready(function() {
     });
     
 	$(document).on("click", ".chatListItem",function(event){
-    var com = 'JOINCHAT';
-    var uname = document.getElementById('uname').value;
-    var chatName = $(this).html();
-    console.log(chatName);
-	XMLHttp.open("GET", "/cgi-bin/ogilviethompsonh_chatAjax.cgi?"
+		var com = 'JOINCHAT';
+		var uname = document.getElementById('uname').value;
+		var chatName = $(this).html();
+		chosenChat = chatName;
+	
+		document.getElementById('newChatButton').disabled = true;
+		document.getElementById('messageForm').style.visibility = "visible";
+		document.getElementById('chatLog_area').style.visibility = "hidden";
+	
+		console.log(chatName);
+	
+		clearInterval(intVar);
+		
+		XMLHttp.open("GET", "/cgi-bin/ogilviethompsonh_chatAjax.cgi?"
 						 + "&command=" + com
 						 + "&username=" + uname
 						 + "&chatName=" + chatName
 						 ,true);
 	
-	XMLHttp.onreadystatechange=function() {
-    	if(XMLHttp.readyState == 4){
-			var response = XMLHttp.responseText
-			document.getElementById('connect').innerHTML = response;
-			if (response === "Sorry, but the chatroom is full"){
-				document.getElementById('message').disabled = true;
-				clearInterval(intVar);
-				document.getElementById('hangUpButton').disabled = true;
+		XMLHttp.onreadystatechange=function() {
+			if(XMLHttp.readyState == 4){
+				var response = XMLHttp.responseText
+				document.getElementById('connect').innerHTML = response;
+				if (response === "Sorry, but the chatroom is full"){
+					document.getElementById('message').disabled = true;
+					clearInterval(intVar);
+					document.getElementById('hangUpButton').disabled = true;
+				}
 			}
 		}
-	}
-		
+		refreshChats();
     });
 });

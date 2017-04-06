@@ -28,6 +28,7 @@ void send (Fifo sendfifo, Cgicc cgi, string stCommand);
 void get (Fifo sendfifo, Fifo recfifo, string stCommand);
 //Precondition: sendfifo is the fifo to send messages to the server, recfifo is the fifo to receive messages from the server, and stCommand is the command
 //Postcondition: The entire chatlog has been cout-ed
+void getMessages(string stCommand, Fifo sendfifo, Fifo recfifo, Cgicc cgi);
 void remove (Fifo sendfifo, Cgicc cgi, string stCommand);
 void user (Fifo sendfifo, Fifo recfifo, Cgicc cgi);
 void join(Fifo sendfifo, Fifo recfifo, Cgicc cgi, string stCommand);
@@ -68,6 +69,10 @@ int main() {
   if (stCommand == "CHECK"){
    user(sendfifo, recfifo, cgi);
   }
+  
+  if (stCommand == "GETMESSAGES"){
+	getMessages(stCommand, sendfifo, recfifo, cgi);
+  }
    
 	sendfifo.fifoclose();
 	recfifo.fifoclose();
@@ -95,7 +100,25 @@ void get (Fifo sendfifo, Fifo recfifo, string stCommand){
 		cout << reply;
 		reply = recfifo.recv();
 		if (reply.find("$END") != -1){
-			cout<< reply.substr(0,reply.find("$END")) << endl;
+			cout << "<p>" << reply.substr(0,reply.find("$END")) << "</p>";
+		}
+	}
+}
+
+void getMessages(string stCommand, Fifo sendfifo, Fifo recfifo, Cgicc cgi){
+	form_iterator chatName = cgi.getElement("chatName");
+	string stChatName = **chatName;
+	string send = stCommand+stChatName;
+	sendfifo.openwrite();
+	sendfifo.send(send);
+	recfifo.openread();
+	string reply = recfifo.recv();
+	while(reply.find("$END") == -1){
+		reply = "<p>" + reply + "</p>";
+		cout << reply;
+		reply = recfifo.recv();
+		if (reply.find("$END") != -1){
+			cout << "<p>" << reply.substr(0,reply.find("$END")) << "</p>";
 		}
 	}
 }

@@ -76,4 +76,9 @@ void chatRoom::outputChat(Fifo sendfifo){
 		sendfifo.send(outMessage);
 		sendfifo.fifoclose();
 	}
+	string outMessage = "$END";
+	cout << outMessage << endl;
+	sendfifo.openwrite();
+	sendfifo.send(outMessage);
+	sendfifo.fifoclose();
 }
