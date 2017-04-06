@@ -97,9 +97,8 @@ function getMessages(){
 			sendBusy = false;
 			}
 		}
-	}
 	XMLHttp.send(null);
-}
+	}
 
 function refreshChats(){
     intVar = setInterval(function(){ getResponse()}, 2000);
