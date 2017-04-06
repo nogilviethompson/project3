@@ -17,7 +17,7 @@ function init() {
 function user(){
 	var com = 'CHECK';
 	var uname = document.getElementById('uname').value;
-	XMLHttp.open("GET", "/cgi-bin/ogilviethompsonh_chatAjax.cgi?"
+	XMLHttp.open("GET", "/cgi-bin/xuy_chatAjax.cgi?"
 						 + "&command=" + com
 						 + "&username=" + uname
 						 ,true);
@@ -51,18 +51,18 @@ function sendMessage(){
 	
 	sendBusy = true;
 	
-	XMLHttp.open("GET", "/cgi-bin/ogilviethompsonh_chatAjax.cgi?"
+	XMLHttp.open("GET", "/cgi-bin/xuy_chatAjax.cgi?"
 						 + "&command=" + com
 						 + "&username=" + uname
 						 + "&message=" + message
 						 ,true);
 	XMLHttp.send(null);
-	document.chatForm.textInput.value = "";
+	document.messageForm.textInput.value = "";
 }
 
 function getResponse(){
 	var com = 'GETCHATS';
-	XMLHttp.open("GET", "/cgi-bin/ogilviethompsonh_chatAjax.cgi?"
+	XMLHttp.open("GET", "/cgi-bin/xuy_chatAjax.cgi?"
 						 + "&command=" + com
 						 ,true);
 	
@@ -85,7 +85,7 @@ function getResponse(){
 function getMessages(){
 	var com = 'GETMESSAGES';
 	
-	XMLHttp.open("GET", "/cgi-bin/ogilviethompsonh_chatAjax.cgi?"
+	XMLHttp.open("GET", "/cgi-bin/xuy_chatAjax.cgi?"
 						 + "&command=" + com
 						 + "&chatName=" + chosenChat
 						 ,true);
@@ -116,8 +116,11 @@ function removeUser(){
 	document.getElementById('chatForm').style.visibility = "hidden";
 	document.getElementById('messageForm').style.visibility = "hidden";
 	var com = 'REMOVE';
+
 	sendBusy = true;
-	XMLHttp.open("GET", "/cgi-bin/ogilviethompsonh_chatAjax.cgi?"
+	
+	XMLHttp.open("GET", "/cgi-bin/xuy_chatAjax.cgi?"
+
 						 + "&command=" + com
 						 ,true);
 	document.usernameForm.unameInput.value = "";
@@ -140,7 +143,27 @@ function checkName() {
 function newChat(){
 	document.getElementById('newChatButton').disabled = true;
 	document.getElementById('chatForm').style.visibility = "visible";
-	document.getElementById('chatLog_area').style.visibility = "hidden";
+	//document.getElementById('chatLog_area').style.visibility = "hidden";
+	document.getElementById('uname').disabled = true;
+}
+
+function createChat(){
+	document.getElementById('uname').disabled = true;
+	document.getElementById('messageForm').style.visibility = "visible";
+	document.getElementById('message').disabled=false;
+	var uname = document.getElementById('uname').value;
+	var chatName=document.getElementById('chatName').value;
+	document.getElementById('response_area').innerHTML = "Your chatroom's name is "+chatName;
+	var com = 'NEWCHAT';
+	XMLHttp.open("GET", "/cgi-bin/xuy_chatAjax.cgi?"
+						 + "&command=" + com
+						 + "&username=" + uname
+						 +"&chatName"+chatName
+						 ,true);
+	document.usernameForm.unameInput.value = "";
+	XMLHttp.send(null);
+	
+	
 }
 
 $(document).ready(function() {
@@ -160,6 +183,7 @@ $(document).ready(function() {
     });
     
 	$(document).on("click", ".chatListItem",function(event){
+
 		var com = 'JOINCHAT';
 		var uname = document.getElementById('uname').value;
 		var chatName = $(this).html();
@@ -173,7 +197,8 @@ $(document).ready(function() {
 	
 		clearInterval(intVar);
 		
-		XMLHttp.open("GET", "/cgi-bin/ogilviethompsonh_chatAjax.cgi?"
+		XMLHttp.open("GET", "/cgi-bin/xuy_chatAjax.cgi?"
+
 						 + "&command=" + com
 						 + "&username=" + uname
 						 + "&chatName=" + chatName
